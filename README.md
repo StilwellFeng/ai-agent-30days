@@ -6,6 +6,8 @@
 
 直接用浏览器打开 [`index.html`](index.html)（双击即可），从左侧 **Day 1** 开始学。
 
+**🌐 在线学习（已发布）**：<https://stilwellfeng.github.io/ai-agent-30days/> 手机/电脑打开即学，含 30 课与单文件手机版页面。
+
 **📱 想在手机上学？** 用 [`AI-Agent-30天课程-手机版.html`](AI-Agent-30天课程-手机版.html)（单文件，已内置全部 30 课与图示）：AirDrop/微信发到手机，用浏览器打开即可离线学习；带「今日学习」导航与打卡。内容更新后可用 `python3 tools/build_mobile.py` 重新生成。
 
 - 每课结构：文字讲解 → 手绘 SVG 图解 → 课后练习 → 打卡
