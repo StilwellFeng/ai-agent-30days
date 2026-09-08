@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 20 · Agent 的记忆与状态持久化实战 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 20 / 30 · 第三周 · 工程化开发</div>
+        <h1>Agent 的记忆与状态持久化实战</h1>
+        <p class="sub">“记忆”不能只活在内存里。今天学怎么把会话、偏好、知识真正“存下来”，让 Agent 重启后还记得。</p>
+        <div class="goal"><span class="chip">🎯 目标：设计并落地三类持久化存储</span><span class="chip">⏱ 30–40 分钟</span></div>
+      </header>
+      <article>
+        <p class="lead">Day 6 讲了记忆的三种类型。今天回答工程问题：<strong>存在哪？什么时候抽出来存？怎么在每轮对话时用回去？</strong></p>
+
+        <h2>三类要“落库”的状态</h2>
+        <figure><div class="frame"><img src="../diagrams/d20-persistence.svg" alt="状态持久化的三类存储"></div>
+        <figcaption>图 20-1　会话历史、用户画像、任务知识——按“生命周期”选择存储</figcaption></figure>
+
+        <h2>落地建议（由简到繁）</h2>
+        <ol>
+          <li><strong>第一步：SQLite 存对话</strong>。一张表 <code>messages(session_id, role, content, ts)</code> 就能实现“关掉重开还能接着聊”。Python 标准库自带 sqlite3，零依赖。</li>
+          <li><strong>第二步：抽用户画像</strong>。每轮结束后让模型输出“本次新确认的用户事实”（如“住上海、预算敏感”），写入 <code>user_profile</code> 表；下一轮注入系统提示词。比翻历史便宜得多。</li>
+          <li><strong>第三步：知识进向量库</strong>。长期知识/资料走 RAG（Day 11/12），从向量库检索相关片段注入上下文。</li>
+        </ol>
+
+        <h2>每轮“装进上下文”的组装顺序（参考）</h2>
+        <pre>系统提示词（人设/规则）
++ 用户画像（从 profile 表读出：住上海、预算敏感）
++ 相关知识（从向量库检索：最近 3 条相关笔记）
++ 最近对话（最近 N 轮原文 + 更早的摘要）
++ 本轮用户输入
+──────────────────── 以上全部进入上下文窗口 ────────────────────</pre>
+
+        <h2>三个常见坑</h2>
+        <ul>
+          <li><strong>把整个历史当“记忆”</strong>：又贵又容易超窗。画像 + 摘要才是长期记忆的正解。</li>
+          <li><strong>存了不校验</strong>：模型抽出的“用户事实”可能抽错（把“我讨厌 X”抽成喜欢）。加人工确认或规则过滤。</li>
+          <li><strong>忘了隐私与删除</strong>：用户问“删掉我的数据”时，你要真能删。设计表结构时就留 user_id，别做“删不掉”的 Agent。</li>
+        </ul>
+
+        <div class="callout tip"><strong>💡 用 Day 7 的代码感受：</strong><code>mini_agent.py</code> 里 NOTES 是内存字典，程序一关就没了。把 <code>FACTS</code> 换成 sqlite3 表，就是一次“状态持久化实战”——改动不到 20 行，强烈建议试试。</div>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 20 分钟）</h2>
+          <ol>
+            <li>设计你项目的三张表：messages / user_profile / knowledge_chunks，各写 3 个字段。</li>
+            <li>（选做）改 Day 7 迷你 Agent：把 FACTS 存进 sqlite3，重启后运行 <code>看看记忆</code> 验证还在。</li>
+            <li>写下你的“每轮上下文组装顺序”（参照上面的 pre 块）。</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>三类落库</span><span>会话历史（SQLite 表）· 用户画像（抽取+注入）· 知识（向量库检索）</span>
+            <span>组装顺序</span><span>系统提示 → 画像 → 相关知识 → 近轮历史 → 本轮输入</span>
+            <span>三坑</span><span>历史≠记忆 · 画像要校验 · 别忘了删除与隐私</span>
+            <span>动手点</span><span>把迷你 Agent 的内存记忆改成 sqlite3，<20 行</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：第三周实战——做一个“定时自动收集 + 总结 + 报告”的信息助手，串起编排与持久化。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

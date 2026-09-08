@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 15 · 认识 Agent 开发框架 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 15 / 30 · 第三周 · 工程化开发</div>
+        <h1>认识 Agent 开发框架（LangChain / LlamaIndex）</h1>
+        <p class="sub">前两周我们手工理解了每个零件。今天认识“工具箱”：框架把重复劳动打包，让你专注业务。</p>
+        <div class="goal"><span class="chip">🎯 目标：理解框架的分层与取舍，选对工具</span><span class="chip">⏱ 30 分钟</span></div>
+      </header>
+      <article>
+        <p class="lead">写 Agent 时你会发现大量“接线”工作：连模型、拼提示词、注册工具、管记忆、做检索……框架（如 <strong>LangChain</strong>、<strong>LlamaIndex</strong>）把这些封装成积木。它们是<strong>工具，不是魔法</strong>——前两周的原理依然全部适用。</p>
+
+        <h2>框架帮你省了什么</h2>
+        <figure><div class="frame"><img src="../diagrams/d15-framework.svg" alt="应用-框架-底层能力三层结构"></div>
+        <figcaption>图 15-1　框架处于“你的业务”和“底层能力”之间，负责通用接线</figcaption></figure>
+        <table>
+          <tr><th>常见重复劳动</th><th>框架提供的抽象</th></tr>
+          <tr><td>切换不同厂商的模型</td><td>统一的 Model 接口</td></tr>
+          <tr><td>把工具说明注册给 LLM</td><td>Tool 装饰器 / 工具列表</td></tr>
+          <tr><td>对话历史怎么带</td><td>Memory 组件</td></tr>
+          <tr><td>文档切块/向量化/检索</td><td>Loader / Splitter / Retriever</td></tr>
+          <tr><td>ReAct 循环怎么写</td><td>Agent + Executor</td></tr>
+        </table>
+
+        <h2>LangChain 与 LlamaIndex 怎么选（粗略指南）</h2>
+        <ul>
+          <li><strong>LangChain</strong>：生态大、组件全，适合做“有工具、多步骤、要编排”的通用 Agent。</li>
+          <li><strong>LlamaIndex</strong>：专注“文档/数据接入 + 检索问答”，做知识库/RAG 更顺手。</li>
+          <li>两者不是敌人，很多项目混用，或干脆用更轻的方案（自己写 100 行）。</li>
+        </ul>
+
+        <div class="callout warn"><strong>⚠️ 客观提醒：</strong>框架更新极快、版本之间 API 常变，网上的老教程经常跑不通。学习时<strong>以官方文档 + 当前版本示例为准</strong>，别背旧代码。这也是本课不给“必跑代码”的原因。</div>
+
+        <h2>一个判断框架是否好用的清单</h2>
+        <ol>
+          <li>出问题能不能看懂它的报错和源码？（太黑盒 = 以后难排查）</li>
+          <li>升级频繁吗？社区活跃吗？（活跃 = 修 bug 快，但也可能天天变）</li>
+          <li>你只是想要一个检索问答，还是复杂编排？（需求简单就别上重框架）</li>
+        </ol>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 12 分钟）</h2>
+          <ol>
+            <li>浏览 LangChain / LlamaIndex 官网首页（只读，不装），各记下 3 个核心概念。</li>
+            <li>把你 Day 14 的笔记问答助手，映射到框架组件（Loader/Splitter/Retriever…），画一张对应图。</li>
+            <li>写下你的判断：你的第一个正式项目，用框架还是手写？理由是什么？</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>框架价值</span><span>封装“接模型/拼提示/注册工具/管记忆/检索”等重复劳动</span>
+            <span>两个代表</span><span>LangChain（通用 Agent 编排）· LlamaIndex（文档/RAG）</span>
+            <span>核心提醒</span><span>原理不变；API 常变，以官方文档为准</span>
+            <span>选择观</span><span>需求简单就别上重框架；黑盒要能看懂源码</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：动手用框架的核心组件——Model、Prompt、Tool、Memory、Retriever 各是干嘛的、怎么拼。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

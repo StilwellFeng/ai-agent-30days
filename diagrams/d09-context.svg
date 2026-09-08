@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 420" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <defs><marker id="p9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4f46e5"/></marker></defs>
+  <text x="440" y="34" font-size="19" font-weight="700" fill="#1f2430" text-anchor="middle">上下文工程：把“有限的窗口”用到极致</text>
+
+  <rect x="30" y="70" width="250" height="120" rx="16" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+  <text x="155" y="100" font-size="15.5" font-weight="700" fill="#4338ca" text-anchor="middle">① 精挑：只放有用的</text>
+  <text x="155" y="128" font-size="13" fill="#475569" text-anchor="middle">检索到的相关片段</text>
+  <text x="155" y="150" font-size="13" fill="#475569" text-anchor="middle">+ 必要的角色与指令</text>
+  <text x="155" y="172" font-size="12.5" fill="#94a3b8" text-anchor="middle">无关历史一律不带</text>
+
+  <rect x="315" y="70" width="250" height="120" rx="16" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <text x="440" y="100" font-size="15.5" font-weight="700" fill="#0f766e" text-anchor="middle">② 压缩：历史太长就“浓缩”</text>
+  <text x="440" y="128" font-size="13" fill="#115e59" text-anchor="middle">旧对话 → 让模型写成摘要</text>
+  <text x="440" y="150" font-size="13" fill="#115e59" text-anchor="middle">只保留结论/关键事实/待办</text>
+  <text x="440" y="172" font-size="12.5" fill="#94a3b8" text-anchor="middle">（摘要 + 最近几轮原文）</text>
+
+  <rect x="600" y="70" width="250" height="120" rx="16" fill="#fdf2f8" stroke="#ec4899" stroke-width="2"/>
+  <text x="725" y="100" font-size="15.5" font-weight="700" fill="#be185d" text-anchor="middle">③ 缓存：重复内容不重复算</text>
+  <text x="725" y="128" font-size="13" fill="#9d174d" text-anchor="middle">固定前缀（系统提示/资料）</text>
+  <text x="725" y="150" font-size="13" fill="#9d174d" text-anchor="middle">缓存后再次调用更省更便宜</text>
+  <text x="725" y="172" font-size="12.5" fill="#94a3b8" text-anchor="middle">（各家平台支持情况不同）</text>
+
+  <line x1="155" y1="190" x2="440" y2="236" stroke="#4f46e5" stroke-width="1.8" marker-end="url(#p9)"/>
+  <line x1="440" y1="190" x2="440" y2="236" stroke="#4f46e5" stroke-width="1.8" marker-end="url(#p9)"/>
+  <line x1="725" y1="190" x2="440" y2="236" stroke="#4f46e5" stroke-width="1.8" marker-end="url(#p9)"/>
+
+  <rect x="240" y="240" width="400" height="70" rx="16" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <text x="440" y="270" font-size="16" font-weight="700" fill="#6d28d9" text-anchor="middle">组装好的“当前回合输入”</text>
+  <text x="440" y="294" font-size="12.5" fill="#6d28d9" text-anchor="middle">发给 LLM 的全部内容 = 上下文窗口的使用方案</text>
+
+  <rect x="330" y="336" width="220" height="56" rx="14" fill="#fff" stroke="#94a3b8" stroke-width="1.6"/>
+  <text x="440" y="370" font-size="14" font-weight="700" fill="#334155" text-anchor="middle">目标：花最少 Token，办最多事</text>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 300" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <text x="440" y="36" font-size="19" font-weight="700" fill="#1f2430" text-anchor="middle">Agent 的四大核心部件（记住这张图 = 记住 Agent）</text>
+
+  <rect x="30" y="70" width="195" height="190" rx="18" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+  <text x="127" y="108" font-size="30">🧠</text>
+  <text x="127" y="142" font-size="17" font-weight="700" fill="#4338ca" text-anchor="middle">规划 Planning</text>
+  <text x="127" y="172" font-size="13" fill="#475569" text-anchor="middle">把大目标拆成小步骤</text>
+  <text x="127" y="196" font-size="13" fill="#475569" text-anchor="middle">决定先做什么后做什么</text>
+  <text x="127" y="220" font-size="13" fill="#475569" text-anchor="middle">做错了会反思重来</text>
+  <text x="127" y="248" font-size="12" fill="#94a3b8" text-anchor="middle">= 大脑的“想”</text>
+
+  <rect x="240" y="70" width="195" height="190" rx="18" fill="#e6f7f4" stroke="#0d9488" stroke-width="2"/>
+  <text x="337" y="108" font-size="30">🗂️</text>
+  <text x="337" y="142" font-size="17" font-weight="700" fill="#0f766e" text-anchor="middle">记忆 Memory</text>
+  <text x="337" y="172" font-size="13" fill="#115e59" text-anchor="middle">记住对话历史与事实</text>
+  <text x="337" y="196" font-size="13" fill="#115e59" text-anchor="middle">短期 = 当前上下文</text>
+  <text x="337" y="220" font-size="13" fill="#115e59" text-anchor="middle">长期 = 外挂知识/档案</text>
+  <text x="337" y="248" font-size="12" fill="#94a3b8" text-anchor="middle">= 大脑的“记”</text>
+
+  <rect x="450" y="70" width="195" height="190" rx="18" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+  <text x="547" y="108" font-size="30">🛠️</text>
+  <text x="547" y="142" font-size="17" font-weight="700" fill="#b45309" text-anchor="middle">工具 Tools</text>
+  <text x="547" y="172" font-size="13" fill="#92400e" text-anchor="middle">调用 API / 搜索 / 计算</text>
+  <text x="547" y="196" font-size="13" fill="#92400e" text-anchor="middle">操作软件与文件</text>
+  <text x="547" y="220" font-size="13" fill="#92400e" text-anchor="middle">让 Agent 能“动手”</text>
+  <text x="547" y="248" font-size="12" fill="#94a3b8" text-anchor="middle">= Agent 的“手”</text>
+
+  <rect x="660" y="70" width="195" height="190" rx="18" fill="#fdf2f8" stroke="#ec4899" stroke-width="2"/>
+  <text x="757" y="108" font-size="30">👣</text>
+  <text x="757" y="142" font-size="17" font-weight="700" fill="#be185d" text-anchor="middle">行动 Action</text>
+  <text x="757" y="172" font-size="13" fill="#9d174d" text-anchor="middle">执行上面决定的步骤</text>
+  <text x="757" y="196" font-size="13" fill="#9d174d" text-anchor="middle">输出文本、调用工具、</text>
+  <text x="757" y="220" font-size="13" fill="#9d174d" text-anchor="middle">给出最终结果</text>
+  <text x="757" y="248" font-size="12" fill="#94a3b8" text-anchor="middle">= Agent 的“脚”</text>
+</svg>

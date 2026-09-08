@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 23 · Agent 的评测：怎么知道它变好了 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 23 / 30 · 第四周 · 实战与毕业设计</div>
+        <h1>Agent 的评测：怎么知道它变好了</h1>
+        <p class="sub">“感觉变好了”不算数。今天学怎么用测试集和指标，让每一次改进都可量化、可回归。</p>
+        <div class="goal"><span class="chip">🎯 目标：建立“测试集 → 跑分 → 改进”的评测闭环</span><span class="chip">⏱ 30 分钟</span></div>
+      </header>
+      <article>
+        <p class="lead">Agent 是概率系统：改一个提示词，可能修好 A 问题却弄坏 B 问题。<strong>没有评测，你根本不知道是变好还是变坏。</strong>评测 = 给 Agent 建立“考试制度”。</p>
+
+        <h2>评测闭环</h2>
+        <figure><div class="frame"><img src="../diagrams/d23-eval.svg" alt="Agent 评测闭环"></div>
+        <figcaption>图 23-1　建测试集 → 跑评测 → 打分 → 改进 → 再跑（防回归）</figcaption></figure>
+
+        <h2>测试集怎么建</h2>
+        <ol>
+          <li><strong>从真实使用中收集</strong>：把你和用户问过的问题记下来，这是最宝贵的种子。</li>
+          <li><strong>覆盖三类</strong>：正常任务、边界任务（问得很怪/信息不全）、失败案例（之前答错的，防止复发）。</li>
+          <li><strong>写“通过标准”</strong>：不一定写完整答案，可写检查点（“必须包含 3 个价格对比”“必须给出来源”）。</li>
+          <li><strong>数量起步</strong>：30–50 条就能开始，重在持续补充，而不是一步到位。</li>
+        </ol>
+
+        <h2>打分方式（由轻到重）</h2>
+        <table>
+          <tr><th>方式</th><th>适合</th><th>注意</th></tr>
+          <tr><td>规则判分</td><td>有明确格式/关键词（JSON 合法、包含某字段）</td><td>写起来快，但测不了“好不好”</td></tr>
+          <tr><td>LLM 判分</td><td>主观质量（相关性、是否忠实于资料）</td><td>用强模型当裁判；注意裁判自身偏差</td></tr>
+          <tr><td>人工抽检</td><td>重要场景、最终把关</td><td>贵，用于抽检而非全量</td></tr>
+        </table>
+
+        <h2>Agent 特有的评测难点</h2>
+        <ul>
+          <li><strong>多步任务成败</strong>：不只评“最终回答”，还要看步骤对不对（有没有调错工具、传错参数）。</li>
+          <li><strong>非确定性</strong>：同一个问题跑两次结果不同。重要评测跑多次取平均，或固定随机种子。</li>
+          <li><strong>成本与质量一起评</strong>：记录每次的 Token 消耗，别为了 1% 的提升花 3 倍钱。</li>
+        </ul>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 15 分钟）</h2>
+          <ol>
+            <li>为你的毕业设计写 10 条测试问题（5 正常 + 3 边界 + 2 历史失败）。</li>
+            <li>给其中 3 条写“通过标准”（检查点式，不是整句答案）。</li>
+            <li>设计一张记录表：问题 / 通过? / 用了几步 / 花费 Token / 失败原因。</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>评测闭环</span><span>测试集 → 跑分 → 改进 → 回归</span>
+            <span>测试集来源</span><span>真实问题 + 边界 + 历史失败案例</span>
+            <span>打分三档</span><span>规则（快）· LLM 裁判（省人工）· 人工抽检（准）</span>
+            <span>Agent 特有</span><span>评步骤不只看答案 · 应对非确定性 · 成本一起评</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：省钱的学问——Token、缓存与并发，让 Agent 又好又便宜。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

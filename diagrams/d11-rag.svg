@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <defs><marker id="R" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4f46e5"/></marker></defs>
+  <text x="440" y="34" font-size="19" font-weight="700" fill="#1f2430" text-anchor="middle">RAG：先“查资料”，再“写答案”</text>
+
+  <rect x="40" y="70" width="380" height="150" rx="16" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <text x="230" y="100" font-size="15.5" font-weight="700" fill="#0f766e" text-anchor="middle">离线准备（一次做好）</text>
+  <text x="230" y="128" font-size="13" fill="#115e59" text-anchor="middle">你的文档/知识库</text>
+  <text x="230" y="150" font-size="13" fill="#115e59" text-anchor="middle">→ 切成小片段（chunk）</text>
+  <text x="230" y="172" font-size="13" fill="#115e59" text-anchor="middle">→ 每段转成向量</text>
+  <text x="230" y="194" font-size="13" fill="#115e59" text-anchor="middle">→ 存入向量数据库</text>
+  <line x1="420" y1="120" x2="500" y2="120" stroke="#4f46e5" stroke-width="2" marker-end="url(#R)"/>
+
+  <rect x="504" y="70" width="336" height="150" rx="16" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+  <text x="672" y="100" font-size="15.5" font-weight="700" fill="#4338ca" text-anchor="middle">在线问答（每次进行）</text>
+  <text x="672" y="128" font-size="13" fill="#475569" text-anchor="middle">用户提问 → 转成向量</text>
+  <text x="672" y="150" font-size="13" fill="#475569" text-anchor="middle">→ 检索最相关的 3–5 段</text>
+  <text x="672" y="172" font-size="13" fill="#475569" text-anchor="middle">→ 片段 + 问题一起给 LLM</text>
+  <text x="672" y="194" font-size="13" fill="#475569" text-anchor="middle">→ 得到“有依据”的回答</text>
+
+  <rect x="210" y="258" width="460" height="90" rx="16" fill="#fff" stroke="#94a3b8" stroke-width="1.8"/>
+  <text x="440" y="290" font-size="16" font-weight="700" fill="#1f2430" text-anchor="middle">RAG 解决了什么？</text>
+  <text x="440" y="318" font-size="13" fill="#475569" text-anchor="middle">LLM 不知道你的私有资料 → 外挂知识库；还能显著减少“编造”</text>
+
+  <rect x="120" y="376" width="640" height="58" rx="14" fill="#f6f7fb" stroke="#e5e8ef"/>
+  <text x="440" y="412" font-size="13.5" fill="#475569" text-anchor="middle">关键点：答案是 LLM“写”的，但内容来自你检索到的真实片段 —— 记得要求它标注来源</text>
+</svg>

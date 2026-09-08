@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 4 · 提示词工程入门 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 4 / 30 · 零基础入门</div>
+        <h1>提示词工程入门：学会和模型对话</h1>
+        <p class="sub">Agent 再强，第一步永远是“听懂你的需求”。今天把“说话”练成一项可复用的技能。</p>
+        <div class="goal">
+          <span class="chip">🎯 目标：掌握结构化提示模板，输出质量明显提升</span>
+          <span class="chip">⏱ 预计 30 分钟</span>
+          <span class="chip">📖 无代码</span>
+        </div>
+      </header>
+
+      <article>
+        <p class="lead">提示词（Prompt）就是<strong>你给模型的任务说明书</strong>。模型“接龙”时参考什么，很大程度上取决于你怎么说。同一个模型，提示词差一点，结果可能从“能用”变成“废话”。提示词工程 = 学会写这份说明书。</p>
+
+        <h2>“说清楚”比“说得多”重要</h2>
+        <p>对比两种问法：</p>
+        <div class="side-by-side">
+          <div class="qa"><b>😐 模糊：</b><br>“分析一下我们的销售数据。”（模型不知道你的目标、不知道数据在哪、不知道输出什么格式 → 给你一篇正确的废话）</div>
+          <div class="qa"><b>😀 清晰：</b><br>“你是资深数据分析师。这是 2025 年 4 个季度、3 条产品线的销售额（见下表）。请找出增长最快的产品线并解释原因，用表格输出，控制在 200 字内。”（模型知道：身份、背景、任务、约束、格式）</div>
+        </div>
+
+        <h2>一个能干活的结构化提示 = 5 件事</h2>
+        <figure>
+          <div class="frame"><img src="../diagrams/d04-prompt.svg" alt="结构化提示词的五个要素：角色、背景、任务、要求、输出格式"></div>
+          <figcaption>图 4-1　不是每次都要写满 5 项，但任务越重要，越值得写全</figcaption>
+        </figure>
+
+        <h3>通用模板（直接复制用）</h3>
+        <pre>【角色】你是一位__（身份/专业背景）__。
+【背景】__（把必要的上下文、数据、限制说清楚）__。
+【任务】请__（用动词描述要做什么，越具体越好）__。
+【要求】__（不许编造 / 篇幅 / 语气 / 针对谁）__。
+【输出格式】__（表格 / 列表 / JSON / 先结论后解释）__。
+【示例】（可选）例如：__（给 1-2 个你期望的输入输出样例）__。</pre>
+
+        <h2>三个立刻见效的技巧</h2>
+        <ul>
+          <li><strong>给例子（Few-shot）</strong>：与其描述规则，不如直接给 1–2 个“输入→正确输出”的例子。模型是模仿高手，例子比抽象描述更管用。</li>
+          <li><strong>让它“一步一步想”（思维链 CoT）</strong>：复杂问题加一句“请先列出解题步骤，再给出答案”，正确率通常明显提升——因为模型把推理过程“写下来”时更不容易跳步出错。</li>
+          <li><strong>声明禁区</strong>：“如果信息不足，请直接说不知道，不要编造。”这句话能显著减少幻觉式回答。</li>
+        </ul>
+
+        <h2>常见坑（以及解法）</h2>
+        <table>
+          <tr><th>坑</th><th>解法</th></tr>
+          <tr><td>一次塞太多任务：“总结 + 翻译 + 提建议 + 写诗”</td><td>拆成多轮，一次只让它做好一件事</td></tr>
+          <tr><td>没给格式，得到一大段难用的文字</td><td>明确“用表格 / 用列表 / 输出 JSON”</td></tr>
+          <tr><td>把关键数据写在长文末尾，模型“看漏”</td><td>重要信息前置、加粗或用分隔符标出</td></tr>
+          <tr><td>期待它读心</td><td>把背景、受众、成功标准写出来</td></tr>
+        </table>
+
+        <div class="callout warn"><strong>⚠️ 给 Agent 开发者的提示：</strong>当你以后写 Agent 时，<strong>系统提示词（System Prompt）</strong>就是给 Agent 的“人设 + 工作守则”，通常一次性写很长、很细。今天练的这套结构化方法，正是将来写系统提示词的基本功。</div>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 12 分钟）</h2>
+          <ol>
+            <li>用上面的模板，写一个你真实需要的提示词（工作汇报、学习总结、写作都行）。</li>
+            <li>同一任务分别用“模糊版”和“模板版”问两次，对比输出差异，把结论记下来。</li>
+            <li>练习“禁区声明”：问它一个它不可能知道的小众事实（比如某小区今天的物业通知），看加了“不知道就直说”后回答有什么变化。</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>本质</span><span>提示词 = 给模型的任务说明书；说清楚 &gt; 说得多</span>
+            <span>五要素</span><span>角色 · 背景 · 任务 · 要求 · 输出格式（+ 示例）</span>
+            <span>三技巧</span><span>给例子（Few-shot）· 一步一步想（CoT）· 声明禁区防幻觉</span>
+            <span>进阶关联</span><span>这套写法 = 将来 Agent 系统提示词的基本功</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：光会“说”还不够——Agent 怎么真正“动手”？学习工具调用（Function Calling），给 Agent 接上手脚。</p>
+      </article>
+
+      <div class="pager">
+        <a id="prev-link" href="#"></a>
+        <a id="next-link" href="#"></a>
+      </div>
+      <div class="checkin">
+        <button id="checkin-btn">完成本课打卡</button>
+        <small>打卡进度保存在本机浏览器</small>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

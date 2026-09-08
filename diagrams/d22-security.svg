@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 360" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <text x="440" y="34" font-size="19" font-weight="700" fill="#1f2430" text-anchor="middle">Agent 上生产的安全边界（纵深防御）</text>
+
+  <rect x="40" y="70" width="260" height="110" rx="14" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+  <text x="170" y="100" font-size="15.5" font-weight="700" fill="#4338ca" text-anchor="middle">输入层</text>
+  <text x="170" y="130" font-size="13" fill="#475569" text-anchor="middle">· 校验用户输入长度/类型</text>
+  <text x="170" y="152" font-size="13" fill="#475569" text-anchor="middle">· 警惕“提示注入”（让 Agent 越权的恶意话术）</text>
+
+  <rect x="310" y="70" width="260" height="110" rx="14" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <text x="440" y="100" font-size="15.5" font-weight="700" fill="#0f766e" text-anchor="middle">工具层</text>
+  <text x="440" y="130" font-size="13" fill="#115e59" text-anchor="middle">· 最小权限：只给必要工具</text>
+  <text x="440" y="152" font-size="13" fill="#115e59" text-anchor="middle">· 参数白名单 + 沙箱执行</text>
+
+  <rect x="580" y="70" width="260" height="110" rx="14" fill="#fdf2f8" stroke="#ec4899" stroke-width="2"/>
+  <text x="710" y="100" font-size="15.5" font-weight="700" fill="#be185d" text-anchor="middle">操作层</text>
+  <text x="710" y="130" font-size="13" fill="#9d174d" text-anchor="middle">· 危险操作人工确认</text>
+  <text x="710" y="152" font-size="13" fill="#9d174d" text-anchor="middle">· 敏感数据脱敏/不落日志</text>
+
+  <rect x="120" y="210" width="640" height="56" rx="14" fill="#fff" stroke="#94a3b8" stroke-width="1.6"/>
+  <text x="440" y="244" font-size="14.5" fill="#334155" text-anchor="middle">贯穿全程：鉴权（谁在用）· 审计日志（做了什么）· 限流（别被打爆）· 额度（别烧光预算）</text>
+
+  <rect x="240" y="286" width="400" height="48" rx="12" fill="#f6f7fb" stroke="#e5e8ef"/>
+  <text x="440" y="316" font-size="13.5" fill="#475569" text-anchor="middle">原则：默认拒绝，按需放行；坏人视角测自己的 Agent</text>
+</svg>

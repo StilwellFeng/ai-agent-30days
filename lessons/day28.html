@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 28 · 部署你的 Agent：API 服务与简单前端 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 28 / 30 · 第四周 · 实战与毕业设计</div>
+        <h1>部署你的 Agent：API 服务与简单前端</h1>
+        <p class="sub">让作品从“我电脑里能跑”变成“别人也能用”。今天部署一个最小可用的服务。</p>
+        <div class="goal"><span class="chip">🎯 目标：跑通“网页 → API → Agent”的最小部署</span><span class="chip">⏱ 60–90 分钟</span><span class="chip">💻 部署实操</span></div>
+      </header>
+      <article>
+        <p class="lead">“部署”听起来吓人，本质就一句话：<strong>把你的 Agent 包成一个 HTTP 服务，让网页/手机能通过 URL 调用它。</strong>先在本机跑通，再考虑上云。</p>
+
+        <h2>最小拓扑</h2>
+        <figure><div class="frame"><img src="../diagrams/d28-deploy.svg" alt="Agent 部署最小拓扑"></div>
+        <figcaption>图 28-1　用户 → API 服务 → Agent 逻辑 → LLM API；密钥只在服务端，绝不进前端</figcaption></figure>
+
+        <h2>分步走</h2>
+        <ol>
+          <li><strong>把你的 Agent 逻辑包成一个函数</strong>：<code>def chat(user_input, history) -&gt; str</code>。先保证“函数能跑”，部署只是给函数加一层“网络壳”。</li>
+          <li><strong>起一个本地 API 服务</strong>：用你熟悉的 Web 框架（如 Python 的 Flask/FastAPI）暴露一个 <code>/chat</code> 接口，接收 JSON、返回 JSON。具体框架用法以官方文档为准。</li>
+          <li><strong>加一个极简网页</strong>：一个输入框 + 聊天列表 + 一个 fetch 调用本地接口（几十行 HTML/JS 即可）。</li>
+          <li><strong>本机验证</strong>：浏览器打开 <code>http://127.0.0.1:端口</code>，完整聊一轮。</li>
+          <li><strong>（可选）上云</strong>：部署到服务器/托管平台（需要账号与配置，超出本课范围；上生产前先看 Day 22 的安全清单）。</li>
+        </ol>
+
+        <h2>上线前必查清单</h2>
+        <ul>
+          <li>密钥只存在服务端环境变量，前端和代码库都没有。</li>
+          <li>接口有鉴权（哪怕是简单的口令/Token），不能裸奔公网。</li>
+          <li>有超时、限流、日志；错误信息不泄露内部细节。</li>
+          <li>有健康检查接口；升级可回滚；关键版本跑过评测集。</li>
+        </ul>
+
+        <div class="callout warn"><strong>⚠️ 公网警告：</strong>把服务暴露到公网前，务必加鉴权和限流。你的 Agent 会调用 LLM、可能操作文件——被陌生人白嫖是小，被恶意利用是大。先在本机/内网玩熟。</div>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 30–60 分钟）</h2>
+          <ol>
+            <li>把 Day 27 的问答 Agent 包成 <code>chat()</code> 函数（如果还没有）。</li>
+            <li>用你熟悉的框架起本地服务，用浏览器或命令行工具测 <code>/chat</code> 接口。</li>
+            <li>写 3 行“部署笔记”：启动命令、依赖清单、遇到的一个坑。</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>部署本质</span><span>给 Agent 函数加一层 HTTP“壳”</span>
+            <span>最小闭环</span><span>网页 → API → Agent → LLM，本机先跑通</span>
+            <span>密钥铁律</span><span>只在服务端，前端/代码库/日志都没有</span>
+            <span>公网红线</span><span>鉴权 + 限流 + 日志 + 可回滚，缺一不上</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：Agent 的安全与伦理专题——幻觉防护、提示注入、滥用风险，做负责任的开发者。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

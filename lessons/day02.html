@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 2 · 大语言模型是怎么工作的 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 2 / 30 · 零基础入门</div>
+        <h1>大语言模型（LLM）是怎么工作的</h1>
+        <p class="sub">不聊复杂的数学公式，用“猜词游戏”理解 Agent 的大脑。</p>
+        <div class="goal">
+          <span class="chip">🎯 目标：理解 LLM 的本质、能力与局限</span>
+          <span class="chip">⏱ 预计 25 分钟</span>
+          <span class="chip">📖 无代码</span>
+        </div>
+      </header>
+
+      <article>
+        <p class="lead">把“大语言模型”这五个字拆开：<strong>语言模型 = 学语言的模型</strong>。它学到的核心本领只有一个——<strong>预测下一个词（Token）</strong>。所有看起来“聪明”的回答，都是这个简单动作重复成千上万次拼出来的。</p>
+
+        <h2>一次只预测一个 Token</h2>
+        <p>模型并不“读”整句话，而是把文字切成小块（英文单词、中文的“字/词”都算 <strong>Token</strong>），然后逐个预测下一个最可能出现的 Token。</p>
+        <figure>
+          <div class="frame"><img src="../diagrams/d02-token.svg" alt="大语言模型预测下一个 Token 的原理图"></div>
+          <figcaption>图 2-1　你看到的是“回答”，模型内部其实是在玩一场超长的“接龙”：猜下一个词 → 拼回去 → 再猜下一个</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Token（词元）</strong>：模型处理文字的最小单位。1 个汉字大约占 1–2 个 Token，1 个英文单词约 1 个 Token。</li>
+          <li><strong>上下文窗口（Context Window）</strong>：模型一次能“看到”的文字总量（输入 + 输出）。比如 128K 窗口 ≈ 能装下一本书。超出的部分它看不到。</li>
+          <li><strong>随机性</strong>：模型按概率“抽样”选词，而不是每次都选概率最高的那个，所以同一个问题答案会略有不同（温度 temperature 参数控制随机程度）。</li>
+        </ul>
+
+        <h2>为什么叫“大”语言模型</h2>
+        <p>“大”指三样东西都很大：</p>
+        <table>
+          <tr><th>维度</th><th>含义</th><th>通俗理解</th></tr>
+          <tr><td>参数多</td><td>几百亿到上万亿个可调参数</td><td>大脑的“神经元连接”非常多</td></tr>
+          <tr><td>数据多</td><td>几乎整个互联网的文本</td><td>读过的书/网页超乎想象</td></tr>
+          <tr><td>算力多</td><td>成千上万块 GPU 训练数月</td><td>“学费”极高，普通人无法自训</td></tr>
+        </table>
+
+        <h2>一个大模型是怎么“养”出来的</h2>
+        <figure>
+          <div class="frame"><img src="../diagrams/d02-training.svg" alt="大模型训练的三大阶段"></div>
+          <figcaption>图 2-2　预训练学“语言和知识”，微调学“听话”，人类反馈让它“更讨人喜欢且安全”</figcaption>
+        </figure>
+        <div class="callout tip"><strong>💡 对学习者的启示：</strong>我们平时用的是训练好的成品模型，<strong>不需要自己训练</strong>。真正要学的是“怎么指挥它、给它配什么工具、怎么验证结果”——这正是本课程后面全部的内容。</div>
+
+        <h2>LLM 能做什么、不能做什么</h2>
+        <table>
+          <tr><th>✅ 很擅长</th><th>❌ 天生做不好</th></tr>
+          <tr>
+            <td>总结、翻译、改写、润色文字</td>
+            <td><strong>事实核查</strong>：会“自信地编造”（幻觉），尤其是不知名的小事</td>
+          </tr>
+          <tr><td>根据示例推理、写代码、头脑风暴</td><td><strong>实时信息</strong>：知识有截止日期，不知道“现在”发生了什么</td></tr>
+          <tr><td>理解意图、多轮对话</td><td><strong>精确计算</strong>：多位乘法都可能算错（它更擅长“像”而非“算准”）</td></tr>
+          <tr><td>处理超长文本并抓重点</td><td><strong>自己行动</strong>：只会输出文字，不会替你点击、查询、执行</td></tr>
+        </table>
+        <p>注意最后一行——<strong>“只会输出文字、不能自己行动”</strong>，正是 Agent 要补上的短板。Day 3 我们来看 Agent 怎么补。</p>
+
+        <h2>常见疑问</h2>
+        <div class="qa"><b>Q：为什么模型会一本正经地胡说八道（幻觉）？</b><br>A：因为它本质上是在“接龙”，目标是生成<em>像样</em>的文字，而不是查证<em>真实</em>的事实。应对办法：给它可靠资料（RAG，第 11 天）、让它引用来源、重要信息人工复核。</div>
+        <div class="qa"><b>Q：上下文窗口越大越好吗？</b><br>A：越大能“记住”越多，但塞太多无关内容会让它“注意力分散”、变慢变贵。工程上讲究<strong>只放有用的信息</strong>——这是后面“上下文工程”（第 9 天）的主题。</div>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 10 分钟）</h2>
+          <ol>
+            <li><strong>体验“接龙”</strong>：给 AI 输入“从前有座山，山里有个”，看它怎么接；再输入“请用一句话证明你不是 AI”，感受它的“像人”程度。</li>
+            <li><strong>找出幻觉</strong>：让它“介绍一本 2024 年出版、讲 AI Agent 的书，并给出作者”，然后搜索验证——大概率会发现它编了书名。记下这次体验，这就是“幻觉”。</li>
+            <li><strong>感受上下文</strong>：和它聊 10 轮后，问“我们第一轮聊了什么”，再对比开新会话问同样的问题，体会“记忆”与“窗口”的区别。</li>
+            <li>想一想：如果让 LLM 自己去“查现在几点”“搜索今天的新闻”，它做不到——<strong>这正是 Agent 存在的理由</strong>。把它写进今天的笔记。</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>LLM 的本质</span><span>预测下一个 Token 的“接龙大师”，重复成千上万次拼出回答</span>
+            <span>为什么强</span><span>参数多 + 数据多 + 算力多，从海量文本中学到语言与知识规律</span>
+            <span>三个关键概念</span><span>Token（最小单位）、上下文窗口（一次能看多少）、温度（随机程度）</span>
+            <span>核心局限</span><span>会幻觉、无实时信息、算不准、<strong>不能自己行动</strong> → 需要 Agent 来补</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：Agent 怎么补上 LLM 的短板？我们学习它的四大核心部件和工作循环——这是全课程最重要的一张图。</p>
+      </article>
+
+      <div class="pager">
+        <a id="prev-link" href="#"></a>
+        <a id="next-link" href="#"></a>
+      </div>
+      <div class="checkin">
+        <button id="checkin-btn">完成本课打卡</button>
+        <small>打卡进度保存在本机浏览器</small>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

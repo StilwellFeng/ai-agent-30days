@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 8 · 提示词进阶：角色、约束与输出控制 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 8 / 30 · 第二周 · 让 Agent 更聪明</div>
+        <h1>提示词进阶：角色、约束与输出控制</h1>
+        <p class="sub">从“会聊天”升级到“做产品”：学会写系统提示词，让模型稳定地按你的规矩办事。</p>
+        <div class="goal"><span class="chip">🎯 目标：写出带角色/约束/结构化输出的系统提示词</span><span class="chip">⏱ 30 分钟</span></div>
+      </header>
+      <article>
+        <p class="lead">做 Agent 和平时聊天最大的区别是：<strong>你要的不是“一次答得好”，而是“每次都稳定”。</strong>靠临场发挥不行，要把规矩写进一个固定的<strong>系统提示词（System Prompt）</strong>里。</p>
+
+        <h2>系统提示词 vs 用户消息</h2>
+        <figure><div class="frame"><img src="../diagrams/d08-prompt-adv.svg" alt="系统提示词与用户消息的分工"></div>
+        <figcaption>图 8-1　系统提示词 = 给 Agent 的“岗位说明书 + 员工守则”，每轮对话都生效</figcaption></figure>
+
+        <h2>写系统提示词的四个要点</h2>
+        <ol>
+          <li><strong>定身份与职责</strong>：它是谁、负责什么、不负责什么（“你只处理售后，不做销售推荐”）。</li>
+          <li><strong>立边界</strong>：不能做什么、不确定时怎么办（“信息不足就明确说不清楚，禁止编造”）。</li>
+          <li><strong>定输出契约</strong>：返回 JSON 还是表格？字段叫什么？给一个 schema 或示例。</li>
+          <li><strong>给反例</strong>：“不要这样做：____”比只给正例更能防跑偏。</li>
+        </ol>
+        <pre>【系统提示词（示意模板）】
+你是__产品的__角色__。
+职责：__（能做什么）__。
+边界：__（绝不做什么）__；信息不足时__（怎么处理）__。
+输出：始终返回如下 JSON，不要输出多余文字。
+{"answer": "你的回答", "sources": ["依据来源"], "confidence": 0~1}
+【示例】用户问：__…__　你应返回：__…__</pre>
+
+        <h2>为什么 Agent 必须用结构化输出</h2>
+        <p>因为 Agent 的下游是<strong>程序</strong>，不是人。程序需要稳定地拿到 <code>JSON</code> 才能继续执行：取出参数去调工具、取出结果去填数据库。模型偶尔多写一句“好的！”就会让程序崩溃——所以<strong>把输出格式写进系统提示词 + 程序侧做解析兜底</strong>，是工程标配。</p>
+
+        <div class="callout tip"><strong>💡 进阶心法：提示词也是代码</strong><br>把系统提示词当成代码来管理：放进配置文件、写版本、做回归测试（换了个说法问它，看它还守不守规矩）。Day 23 讲 Agent 评测时会用到。</div>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 12 分钟）</h2>
+          <ol>
+            <li>挑一个你熟悉的场景（如“健身教练”），写一份含<strong>身份/边界/输出格式/一个反例</strong>的系统提示词。</li>
+            <li>让模型“以 JSON 输出 3 条今日建议”，观察它是否遵守；再故意要求“同时用表格输出”，看它在冲突指令下怎么表现。</li>
+            <li>把上一轮的提示词改 1 个词（比如边界），连续问 3 遍，体会“稳定性”为什么重要。</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>核心转变</span><span>从“问得好”到“规矩写死、每次都稳”</span>
+            <span>系统提示词</span><span>身份 + 职责 + 边界 + 输出契约 + 反例，每轮生效</span>
+            <span>结构化输出</span><span>JSON 是 Agent 与程序协作的“接口”，必须稳定</span>
+            <span>工程化</span><span>提示词版本化、可测试，像对待代码一样</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：窗口是有限的，怎么把历史与资料“装”得恰到好处？学上下文工程。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

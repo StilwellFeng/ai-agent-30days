@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <defs>
+    <marker id="L" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4f46e5"/>
+    </marker>
+  </defs>
+
+  <!-- center: LLM brain -->
+  <rect x="300" y="180" width="280" height="120" rx="60" fill="#eef2ff" stroke="#4f46e5" stroke-width="2.5"/>
+  <text x="440" y="232" font-size="19" font-weight="700" fill="#4338ca" text-anchor="middle">🧠 LLM 大脑</text>
+  <text x="440" y="260" font-size="13" fill="#475569" text-anchor="middle">理解目标 → 拆解步骤 → 决定下一步</text>
+  <text x="440" y="282" font-size="12.5" fill="#94a3b8" text-anchor="middle">（循环的“决策中心”）</text>
+
+  <!-- top: 目标 -->
+  <rect x="320" y="40" width="240" height="58" rx="14" fill="#fff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="440" y="76" font-size="15" font-weight="700" fill="#334155" text-anchor="middle">🎯 用户目标</text>
+  <line x1="440" y1="98" x2="440" y2="176" stroke="#4f46e5" stroke-width="2.2" marker-end="url(#L)"/>
+  <text x="455" y="140" font-size="12.5" fill="#66707f">“查一下明天上海天气，</text>
+  <text x="455" y="158" font-size="12.5" fill="#66707f">并提醒我带伞”</text>
+
+  <!-- right: 行动/工具 -->
+  <rect x="620" y="180" width="230" height="120" rx="16" fill="#fff7ed" stroke="#d97706" stroke-width="2.5"/>
+  <text x="735" y="216" font-size="16.5" font-weight="700" fill="#b45309" text-anchor="middle">🛠 行动：调用工具</text>
+  <text x="735" y="244" font-size="13" fill="#92400e" text-anchor="middle">查天气 API / 搜索网页 /</text>
+  <text x="735" y="266" font-size="13" fill="#92400e" text-anchor="middle">读写文件 / 发消息…</text>
+  <line x1="584" y1="240" x2="616" y2="240" stroke="#4f46e5" stroke-width="2.2" marker-end="url(#L)"/>
+  <text x="600" y="226" font-size="12" fill="#66707f" text-anchor="middle">选工具</text>
+
+  <!-- bottom: 观察/记忆 -->
+  <rect x="300" y="360" width="280" height="110" rx="16" fill="#fdf2f8" stroke="#ec4899" stroke-width="2.5"/>
+  <text x="440" y="394" font-size="16.5" font-weight="700" fill="#be185d" text-anchor="middle">👀 观察结果 &amp; 记忆</text>
+  <text x="440" y="420" font-size="13" fill="#9d174d" text-anchor="middle">拿到返回值 → 更新上下文</text>
+  <text x="440" y="444" font-size="13" fill="#9d174d" text-anchor="middle">（记下“已查过、结果是…”）</text>
+  <line x1="735" y1="304" x2="735" y2="356" stroke="#4f46e5" stroke-width="2.2" marker-end="url(#L)"/>
+  <line x1="440" y1="356" x2="440" y2="304" stroke="#4f46e5" stroke-width="2.2" marker-end="url(#L)"/>
+  <text x="552" y="336" font-size="12" fill="#66707f">结果回传</text>
+
+  <!-- left: 判断 -->
+  <rect x="30" y="180" width="210" height="120" rx="16" fill="#f0fdfa" stroke="#0d9488" stroke-width="2.5"/>
+  <text x="135" y="218" font-size="16.5" font-weight="700" fill="#0f766e" text-anchor="middle">✅ 判断是否完成</text>
+  <text x="135" y="246" font-size="13" fill="#115e59" text-anchor="middle">没完成 → 继续规划/行动</text>
+  <text x="135" y="270" font-size="13" fill="#115e59" text-anchor="middle">完成了 → 汇总输出</text>
+  <line x1="296" y1="240" x2="244" y2="240" stroke="#4f46e5" stroke-width="2.2" marker-end="url(#L)"/>
+  <line x1="135" y1="304" x2="135" y2="420" stroke="#4f46e5" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#L)"/>
+  <text x="120" y="380" font-size="11.5" fill="#94a3b8" text-anchor="middle">循环直到完成</text>
+
+  <rect x="560" y="430" width="290" height="58" rx="14" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+  <text x="705" y="456" font-size="14.5" font-weight="700" fill="#4338ca" text-anchor="middle">💬 最终回复用户</text>
+  <text x="705" y="478" font-size="12" fill="#64748b" text-anchor="middle">“明天上海有雨，记得带伞 ☔”</text>
+  <line x1="440" y1="470" x2="556" y2="459" stroke="#4f46e5" stroke-width="2" marker-end="url(#L)"/>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 470" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <defs>
+    <marker id="F" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4f46e5"/>
+    </marker>
+  </defs>
+  <text x="440" y="36" font-size="19" font-weight="700" fill="#1f2430" text-anchor="middle">工具调用（Function Calling）闭环</text>
+
+  <rect x="40" y="70" width="180" height="120" rx="16" fill="#fff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="130" y="102" font-size="15" font-weight="700" fill="#334155" text-anchor="middle">用户提问</text>
+  <text x="130" y="130" font-size="13" fill="#475569" text-anchor="middle">“北京今天会下雨吗？”</text>
+  <text x="130" y="162" font-size="12" fill="#94a3b8" text-anchor="middle">需要实时信息 → 必须查工具</text>
+  <line x1="220" y1="130" x2="266" y2="130" stroke="#4f46e5" stroke-width="2" marker-end="url(#F)"/>
+
+  <rect x="270" y="70" width="210" height="120" rx="16" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+  <text x="375" y="100" font-size="15" font-weight="700" fill="#4338ca" text-anchor="middle">① LLM 决定调工具</text>
+  <text x="375" y="126" font-size="13" fill="#475569" text-anchor="middle">输出结构化调用请求：</text>
+  <text x="375" y="150" font-size="12.5" fill="#4338ca" text-anchor="middle">get_weather(city="北京")</text>
+  <text x="375" y="172" font-size="12" fill="#94a3b8" text-anchor="middle">（不是聊天文字，是 JSON）</text>
+  <line x1="480" y1="130" x2="526" y2="130" stroke="#4f46e5" stroke-width="2" marker-end="url(#F)"/>
+
+  <rect x="530" y="70" width="190" height="120" rx="16" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+  <text x="625" y="100" font-size="15" font-weight="700" fill="#b45309" text-anchor="middle">② 程序执行工具</text>
+  <text x="625" y="126" font-size="13" fill="#92400e" text-anchor="middle">真正的代码去请求</text>
+  <text x="625" y="150" font-size="13" fill="#92400e" text-anchor="middle">天气 API 并拿到结果</text>
+  <text x="625" y="172" font-size="12" fill="#94a3b8" text-anchor="middle">“小雨 18°C”</text>
+  <line x1="625" y1="190" x2="625" y2="240" stroke="#4f46e5" stroke-width="2" marker-end="url(#F)"/>
+
+  <rect x="270" y="244" width="210" height="120" rx="16" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <text x="375" y="274" font-size="15" font-weight="700" fill="#0f766e" text-anchor="middle">③ 结果回填给 LLM</text>
+  <text x="375" y="300" font-size="13" fill="#115e59" text-anchor="middle">把工具返回值拼回对话，</text>
+  <text x="375" y="324" font-size="13" fill="#115e59" text-anchor="middle">让 LLM 基于真实数据作答</text>
+  <line x1="375" y1="240" x2="375" y2="190" stroke="#4f46e5" stroke-width="2" marker-end="url(#F)"/>
+
+  <rect x="530" y="244" width="190" height="120" rx="16" fill="#e6f7f4" stroke="#0d9488" stroke-width="2"/>
+  <text x="625" y="274" font-size="15" font-weight="700" fill="#0f766e" text-anchor="middle">④ 最终回答</text>
+  <text x="625" y="300" font-size="13" fill="#115e59" text-anchor="middle">“会下雨，记得带伞 ☔”</text>
+  <line x1="530" y1="304" x2="484" y2="304" stroke="#4f46e5" stroke-width="2" marker-end="url(#F)"/>
+
+  <text x="440" y="410" font-size="14" font-weight="700" fill="#1f2430" text-anchor="middle">关键理解：</text>
+  <text x="440" y="438" font-size="13.5" fill="#475569" text-anchor="middle">LLM 只负责“决定调哪个工具、传什么参数”，真正“跑起来”的是你的程序 —— 所以工具的边界和权限由你把控</text>
+</svg>

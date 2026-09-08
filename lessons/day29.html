@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 29 · Agent 安全与伦理专题 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 29 / 30 · 第四周 · 实战与毕业设计</div>
+        <h1>Agent 安全与伦理专题</h1>
+        <p class="sub">技术课最后一天：把“能不能做”和“该不该做”一起想清楚，做负责任的 Agent 开发者。</p>
+        <div class="goal"><span class="chip">🎯 目标：建立安全威胁模型与伦理自查习惯</span><span class="chip">⏱ 30 分钟</span></div>
+      </header>
+      <article>
+        <p class="lead">Agent 比普通软件多了一整类新问题：它<strong>有自主性、会用工具、还可能被诱导</strong>。今天把 Day 22 的安全线扩展成完整的“威胁模型 + 伦理清单”。</p>
+<figure><div class="frame"><img src="../diagrams/d29-ethics.svg" alt="发布前伦理自查五问"></div>
+        <figcaption>图 29-1　伦理自查五问：任何一问答不上来，先别发布</figcaption></figure>
+
+        <h2>五大威胁，逐个设防</h2>
+        <table>
+          <tr><th>威胁</th><th>场景</th><th>防护思路</th></tr>
+          <tr><td>提示注入</td><td>网页/文档/邮件里藏恶意指令，诱导 Agent 越权</td><td>外部内容与指令隔离；声明不可信；敏感操作人工确认</td></tr>
+          <tr><td>幻觉误事</td><td>Agent 自信地给出错误“事实”并据此行动</td><td>强制带依据回答；关键结论校验；高风险场景人工复核</td></tr>
+          <tr><td>过度授权</td><td>Agent 权限太大，一步错步步错</td><td>最小权限；只读优先；危险操作二次确认</td></tr>
+          <tr><td>数据泄露</td><td>把敏感资料发给外部模型/写进日志</td><td>数据分级；脱敏；密钥与内容不进日志；隐私删除要能做</td></tr>
+          <tr><td>滥用与依赖</td><td>用户过度信任 Agent 结论、或拿它做批量骚扰/造假</td><td>标注“AI 生成”；使用条款；保留人工责任主体</td></tr>
+        </table>
+
+        <h2>设计时的伦理自查（每次发布前问一遍）</h2>
+        <ol>
+          <li><strong>责任</strong>：出了问题谁负责？Agent 的结论有没有“人”在最终把关？</li>
+          <li><strong>透明</strong>：用户知道自己在和 AI 对话吗？知道它会做什么、不做什么吗？</li>
+          <li><strong>公平与偏见</strong>：它对不同人群会不会给出不公平结果？训练数据偏见可能被放大。</li>
+          <li><strong>隐私</strong>：它存了用户什么数据？用户能查看和删除吗？</li>
+          <li><strong>滥用</strong>：如果被坏人用，会造成什么伤害？有没有限制（限流、内容边界）？</li>
+        </ol>
+
+        <h2>给学习者的三条建议</h2>
+        <ul>
+          <li><strong>把安全当功能，不是补丁</strong>：从设计第一版就画“谁能在哪一步做什么”，别等上线再补。</li>
+          <li><strong>用“坏人视角”测试自己的 Agent</strong>：试着骗它、让它越权、让它胡说——你比攻击者更了解它。</li>
+          <li><strong>保持人在回路</strong>：现阶段，让 Agent 当“副驾”而不是“自动驾驶”，是最负责任也最实用的姿态。</li>
+        </ul>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 15 分钟）</h2>
+          <ol>
+            <li>用上面的自查清单，给你的毕业设计做一次“伦理体检”，写出 3 条改进。</li>
+            <li>尝试对任意一个 AI 助手做一次“提示注入”测试（让它忽略指令），记录结果，理解防线为什么重要。</li>
+            <li>写下你的“责任声明”模板：这个 Agent 能做什么、不能做什么、出问题找谁。</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>五大威胁</span><span>提示注入 · 幻觉 · 过度授权 · 数据泄露 · 滥用依赖</span>
+            <span>伦理五问</span><span>责任 · 透明 · 公平 · 隐私 · 滥用</span>
+            <span>开发者姿态</span><span>安全是功能 · 坏人视角测试 · 人在回路</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：毕业设计！用五段论完成你的专属 Agent，为 30 天画上句号。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

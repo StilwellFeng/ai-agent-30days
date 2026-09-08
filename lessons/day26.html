@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 26 · 实战：办公自动化 Agent | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 26 / 30 · 第四周 · 实战与毕业设计</div>
+        <h1>实战：办公自动化 Agent（文档/表格/邮件）</h1>
+        <p class="sub">把重复的文书工作交给 Agent：读文档、改表格、起草邮件。今天做一个“只读+起草”的安全版。</p>
+        <div class="goal"><span class="chip">🎯 目标：完成一个可用的办公自动化流水线</span><span class="chip">⏱ 60–90 分钟</span><span class="chip">💻 Python</span></div>
+      </header>
+      <article>
+        <p class="lead">办公自动化的黄金起步：<strong>先做“只读 + 起草”类任务</strong>（总结文档、整理表格、起草邮件），让 LLM 输出内容、由你确认后执行。别一上来就让它直接发邮件、删文件。</p>
+
+        <h2>典型流水线（参照 Day 18 编排）</h2>
+        <figure><div class="frame"><img src="../diagrams/d18-orchestration.svg" alt="多步骤编排，适用于办公自动化"></div>
+        <figcaption>图 26-1　办公自动化 = 收集（读文件）→ 处理（LLM 总结/整理）→ 交付（草稿/报表），高风险步骤加人工确认</figcaption></figure>
+
+        <h2>三个“别碰”与三个“先做”</h2>
+        <table>
+          <tr><th>先做（安全）</th><th>别碰（等成熟再说）</th></tr>
+          <tr><td>总结会议记录 → 输出要点草稿</td><td>自动发送邮件给客户</td></tr>
+          <tr><td>把 Excel 里数据整理成报表/图表</td><td>删除/覆盖任何原文件</td></tr>
+          <tr><td>根据模板起草周报/邮件（人工改后发）</td><td>访问含敏感信息的系统（先脱敏）</td></tr>
+        </table>
+
+        <h2>实现要点</h2>
+        <ol>
+          <li><strong>文件读写用可靠库</strong>：处理 Word/Excel/PDF 用成熟的 Python 库（如 python-docx、openpyxl、pdfplumber 等），LLM 只负责“理解内容与生成结果”，不直接操作二进制。具体库名与用法以官方文档为准。</li>
+          <li><strong>输出永远是新文件</strong>：生成 <code>xxx_总结.md</code> / <code>xxx_草稿.md</code>，绝不覆盖原件。原文件只读打开。</li>
+          <li><strong>数据安全</strong>：含个人信息/商业机密的文件，先确认是否允许送给外部模型；不允许就走本地模型或脱敏。</li>
+          <li><strong>人工确认环</strong>：Agent 产出 → 人看一眼 → 确认后才进入“发送/保存”环节。</li>
+        </ol>
+
+        <div class="callout tip"><strong>💡 用本课程文件练手（零风险）：</strong>让 Agent 读本仓库的 <code>lessons/day01.html</code>，总结成 3 条要点并写成 Markdown 新文件——数据是你自己的、操作只生成新文件，安全地体验完整流程。</div>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 30–60 分钟）</h2>
+          <ol>
+            <li>挑一个你常做的文书任务，明确“输入文件 → 处理 → 输出新文件”三段。</li>
+            <li>用你会的工具（或让 AI 助手直接做）跑通一次：输入样例文件 → 得到草稿 → 你人工校对。</li>
+            <li>写一份《人工确认清单》：哪些输出必须你看了才能用？</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>安全起步</span><span>只读 + 起草 + 人工确认，先做这三角色</span>
+            <span>文件铁律</span><span>原件只读、输出永远是新文件</span>
+            <span>分工</span><span>可靠库做文件 IO，LLM 只做理解与生成</span>
+            <span>数据安全</span><span>敏感内容先确认能否送外部模型，必要时脱敏</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：完整项目实战——个人知识库 + 问答 Agent，从需求到 MVP 一次走完。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

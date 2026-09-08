@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 24 · 成本与性能优化：Token、缓存与并发 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 24 / 30 · 第四周 · 实战与毕业设计</div>
+        <h1>成本与性能优化：Token、缓存与并发</h1>
+        <p class="sub">Agent 好用之后，下一个问题永远是“太贵/太慢怎么办”。今天给一套可执行的省钱提速清单。</p>
+        <div class="goal"><span class="chip">🎯 目标：掌握成本分析与六大优化手段</span><span class="chip">⏱ 30 分钟</span></div>
+      </header>
+      <article>
+        <p class="lead">LLM 按 Token 计费、按调用耗时。所以 Agent 的成本 ≈ <strong>Token 数 × 单价 × 调用次数</strong>，延迟 ≈ <strong>调用次数 × 单次耗时</strong>。优化就是分别压这三个乘数。</p>
+<figure><div class="frame"><img src="../diagrams/d24-cost.svg" alt="成本三旋钮：调用次数、Token 数、单价"></div>
+        <figcaption>图 24-1　三个旋钮一起拧：少调几次、少传 Token、用便宜模型/缓存</figcaption></figure>
+
+        <h2>先算账，再优化</h2>
+        <p>别凭感觉。给每个功能记一笔账：</p>
+        <pre>单次成本 ≈ (输入 Token × 输入单价 + 输出 Token × 输出单价) × 每月调用次数
+把“最贵的三笔调用”列出来 → 优先优化它们</pre>
+
+        <h2>六大优化手段（按性价比排序）</h2>
+        <table>
+          <tr><th>手段</th><th>原理</th><th>效果</th></tr>
+          <tr><td>① 少调几次</td><td>合并/删减没必要的模型调用（能用规则就别上 LLM）</td><td>成本延迟双降，最大杠杆</td></tr>
+          <tr><td>② 少传点 Token</td><td>上下文只放相关部分（Day 9 三板斧）</td><td>输入费用大降、更快</td></tr>
+          <tr><td>③ 缓存</td><td>相同前缀/相同问题命中缓存（Prompt Caching、结果缓存）</td><td>重复场景省 50–90%</td></tr>
+          <tr><td>④ 用便宜模型分层</td><td>简单任务用小/便宜模型，难的才用强模型</td><td>整体成本大降</td></tr>
+          <tr><td>⑤ 模型参数调优</td><td>控制输出长度上限、合适温度</td><td>防“话痨”白烧钱</td></tr>
+          <tr><td>⑥ 并发与批处理</td><td>独立请求并行/合并成批量调用</td><td>吞吐提升（注意限流）</td></tr>
+        </table>
+
+        <h2>三个容易忽略的“隐性成本”</h2>
+        <ul>
+          <li><strong>重试放大</strong>：失败重试 3 次 = 成本 ×3。先提高一次成功率，再谈重试。</li>
+          <li><strong>日志里放大文本</strong>：把完整对话打进日志，日志存储和检索也会贵起来。存摘要/结构化字段。</li>
+          <li><strong>评测跑分</strong>：50 条测试 × 每次 3 步 × 迭代 20 版，成本可观。评测集也分“快筛”和“全量”。</li>
+        </ul>
+
+        <div class="callout tip"><strong>💡 性能与体验：</strong>用户感知的“快”，一半来自工程（并发、流式输出、缓存），一半来自心理（先回“收到，正在处理”再异步干活）。体验优化不只有“跑得快”。</div>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 12 分钟）</h2>
+          <ol>
+            <li>给你毕业设计画一条主流程，标出每次模型调用，数一数总调用次数。</li>
+            <li>找出其中“其实不需要 LLM”的步骤（能用规则/查表替代的），至少 1 处。</li>
+            <li>给最贵的调用设计一个“缓存键”：什么情况下可以复用上次结果？</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>成本公式</span><span>Token × 单价 × 调用次数；先算账再优化</span>
+            <span>最大杠杆</span><span>少调几次 &gt; 少传 Token &gt; 缓存 &gt; 模型分层</span>
+            <span>隐性成本</span><span>重试放大 · 日志膨胀 · 评测跑分</span>
+            <span>性能观</span><span>并发/流式/缓存 + 异步体验设计</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：Agent 的“眼睛和耳朵”——多模态 Agent 初探：图片、语音与屏幕操作。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

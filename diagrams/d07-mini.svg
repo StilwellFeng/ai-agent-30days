@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 470" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <defs>
+    <marker id="M" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4f46e5"/>
+    </marker>
+  </defs>
+  <text x="440" y="36" font-size="19" font-weight="700" fill="#1f2430" text-anchor="middle">Day 7 迷你 Agent：结构其实很简单</text>
+
+  <rect x="40" y="80" width="190" height="110" rx="16" fill="#fff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="135" y="114" font-size="15" font-weight="700" fill="#334155" text-anchor="middle">💬 命令行输入</text>
+  <text x="135" y="142" font-size="12.5" fill="#475569" text-anchor="middle">“现在几点？并算 25×4”</text>
+  <text x="135" y="166" font-size="12.5" fill="#94a3b8" text-anchor="middle">（自然语言目标）</text>
+  <line x1="230" y1="135" x2="278" y2="135" stroke="#4f46e5" stroke-width="2" marker-end="url(#M)"/>
+
+  <rect x="282" y="80" width="200" height="110" rx="16" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+  <text x="382" y="112" font-size="15" font-weight="700" fill="#4338ca" text-anchor="middle">🧠 判断器</text>
+  <text x="382" y="138" font-size="12.5" fill="#475569" text-anchor="middle">识别意图：要时间？</text>
+  <text x="382" y="158" font-size="12.5" fill="#475569" text-anchor="middle">要计算？要记事？</text>
+  <text x="382" y="178" font-size="12" fill="#94a3b8" text-anchor="middle">（本课用规则判断，</text>
+  <text x="382" y="196" font-size="12" fill="#94a3b8" text-anchor="middle">将来换成 LLM 判断）</text>
+  <line x1="482" y1="135" x2="530" y2="135" stroke="#4f46e5" stroke-width="2" marker-end="url(#M)"/>
+
+  <rect x="534" y="80" width="180" height="110" rx="16" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+  <text x="624" y="112" font-size="15" font-weight="700" fill="#b45309" text-anchor="middle">🛠️ 工具库</text>
+  <text x="624" y="138" font-size="12.5" fill="#92400e" text-anchor="middle">get_time()</text>
+  <text x="624" y="158" font-size="12.5" fill="#92400e" text-anchor="middle">calculate()</text>
+  <text x="624" y="178" font-size="12.5" fill="#92400e" text-anchor="middle">remember()</text>
+  <text x="624" y="196" font-size="12" fill="#94a3b8" text-anchor="middle">（普通 Python 函数）</text>
+
+  <rect x="270" y="240" width="340" height="100" rx="16" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <text x="440" y="272" font-size="16" font-weight="700" fill="#0f766e" text-anchor="middle">主循环 = 你写的代码</text>
+  <text x="440" y="298" font-size="13" fill="#115e59" text-anchor="middle">while True: 听指令 → 判断 → 调对应工具 → 回结果</text>
+  <text x="440" y="322" font-size="13" fill="#115e59" text-anchor="middle">将来把“判断”换成 LLM，就升级成真正的 Agent</text>
+
+  <line x1="382" y1="190" x2="382" y2="238" stroke="#4f46e5" stroke-width="2" marker-end="url(#M)"/>
+  <line x1="624" y1="190" x2="440" y2="238" stroke="#4f46e5" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#M)"/>
+
+  <rect x="180" y="360" width="520" height="72" rx="16" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+  <text x="440" y="392" font-size="15" font-weight="700" fill="#4338ca" text-anchor="middle">本课目标：亲手跑通“规划—工具—行动”的最小闭环</text>
+  <text x="440" y="418" font-size="13" fill="#475569" text-anchor="middle">不依赖任何 API Key，开箱即跑 —— 建立对 Agent 的肌肉记忆</text>
+</svg>

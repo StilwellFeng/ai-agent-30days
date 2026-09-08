@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 430" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <defs><marker id="p8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#66707f"/></marker></defs>
+  <text x="440" y="34" font-size="19" font-weight="700" fill="#1f2430" text-anchor="middle">提示词进阶：给 Agent 立规矩（System Prompt 思维）</text>
+
+  <rect x="40" y="66" width="390" height="120" rx="14" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+  <text x="235" y="96" font-size="15.5" font-weight="700" fill="#4338ca" text-anchor="middle">系统提示词 System Prompt（一次性设定）</text>
+  <text x="235" y="124" font-size="12.5" fill="#475569" text-anchor="middle">你是谁 / 你的工作准则 / 必须遵守的边界</text>
+  <text x="235" y="146" font-size="12.5" fill="#475569" text-anchor="middle">例：“你是客服助手。只回答售后问题，</text>
+  <text x="235" y="168" font-size="12.5" fill="#475569" text-anchor="middle">不确定就转人工；不承诺赔偿金额。”</text>
+
+  <rect x="450" y="66" width="390" height="120" rx="14" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <text x="645" y="96" font-size="15.5" font-weight="700" fill="#0f766e" text-anchor="middle">用户消息（每轮变化）</text>
+  <text x="645" y="124" font-size="12.5" fill="#115e59" text-anchor="middle">本轮的具体问题、上传的文件、工具结果</text>
+  <text x="645" y="146" font-size="12.5" fill="#115e59" text-anchor="middle">系统提示词固定不变，用户消息每轮都变</text>
+  <text x="645" y="168" font-size="12.5" fill="#115e59" text-anchor="middle">→ 这是 Agent 应用的标准对话结构</text>
+
+  <rect x="40" y="214" width="800" height="80" rx="14" fill="#fff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="440" y="244" font-size="15" font-weight="700" fill="#1f2430" text-anchor="middle">把“规矩”写进系统提示词，比每次哀求更有效</text>
+  <text x="440" y="270" font-size="13" fill="#475569" text-anchor="middle">格式约束：输出 JSON / Markdown 表格　·　行为约束：不要编造 / 先问清楚　·　内容约束：不谈政治 / 不越权</text>
+
+  <text x="160" y="330" font-size="15.5" font-weight="700" fill="#1f2430">结构化输出的价值：</text>
+  <rect x="60" y="348" width="370" height="58" rx="12" fill="#fff7ed" stroke="#d97706" stroke-width="1.8"/>
+  <text x="245" y="374" font-size="13" fill="#92400e" text-anchor="middle">JSON 输出 → 程序直接解析，不用人肉看文字</text>
+  <text x="245" y="394" font-size="13" fill="#92400e" text-anchor="middle">（这是 Agent 能“干活”的关键接口）</text>
+  <text x="620" y="330" font-size="15.5" font-weight="700" fill="#1f2430">少样本的价值：</text>
+  <rect x="470" y="348" width="350" height="58" rx="12" fill="#fdf2f8" stroke="#ec4899" stroke-width="1.8"/>
+  <text x="645" y="374" font-size="13" fill="#9d174d" text-anchor="middle">给 2–3 组“输入→正确输出”例子，</text>
+  <text x="645" y="394" font-size="13" fill="#9d174d" text-anchor="middle">复杂格式一次就能学会</text>
+</svg>

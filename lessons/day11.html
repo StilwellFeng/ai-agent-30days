@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 11 · RAG 入门：给 Agent 外接知识库 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 11 / 30 · 第二周 · 让 Agent 更聪明</div>
+        <h1>RAG 入门：给 Agent 外接知识库</h1>
+        <p class="sub">怎么让 Agent 回答“只有你的文档里才知道”的问题？RAG（检索增强生成）是目前最主流、最务实的答案。</p>
+        <div class="goal"><span class="chip">🎯 目标：理解 RAG 全流程与关键取舍</span><span class="chip">⏱ 30 分钟</span></div>
+      </header>
+      <article>
+        <p class="lead">LLM 的训练数据是“截止到某个时间的公开互联网”，它<strong>天生不知道你的私有文档</strong>，也不该被塞进模型里。RAG 的思路很朴素：<strong>每次回答前，先去你的资料库里“查资料”，把查到的东西放进上下文，再让模型写答案。</strong></p>
+
+        <h2>RAG 全流程</h2>
+        <figure><div class="frame"><img src="../diagrams/d11-rag.svg" alt="RAG 流程：离线索引与在线问答"></div>
+        <figcaption>图 11-1　RAG = 离线把资料变成可检索的“索引” + 在线“先检索、后生成”</figcaption></figure>
+
+        <h2>四个关键细节（决定效果好坏的都在这里）</h2>
+        <ol>
+          <li><strong>切块（Chunking）</strong>：文档切成多大？太小缺上下文，太大噪音多。通常按“标题/段落”切，保留来源信息。经验值几百字一块，需按内容调。</li>
+          <li><strong>向量化（Embedding）</strong>：把每块文字变成向量（Day 12 细讲）。选什么模型影响“懂不懂意思”。</li>
+          <li><strong>检索（Retrieval）</strong>：取回 Top-K 相关块（如 3–5 块）。可加“关键词 + 向量”混合检索提高命中。</li>
+          <li><strong>生成（Generation）</strong>：把“检索到的资料 + 用户问题 + 指令（只能依据资料回答，注明来源）”一起给 LLM。</li>
+        </ol>
+
+        <h2>RAG vs 微调（Finetune），别再搞混</h2>
+        <table>
+          <tr><th></th><th>RAG（检索增强）</th><th>微调（更新模型）</th></tr>
+          <tr><td>本质</td><td>回答时外挂查资料</td><td>改变模型本身的权重/行为</td></tr>
+          <tr><td>适合</td><td>资料常更新、要求可追溯、有私有文档</td><td>固定风格/格式/领域术语，需要“内化”</td></tr>
+          <tr><td>成本/门槛</td><td>较低，随时可改资料</td><td>较高，需训练与评估</td></tr>
+          <tr><td>改资料</td><td>重传/重索引即可</td><td>要重新训练</td></tr>
+        </table>
+        <div class="callout tip"><strong>💡 结论：</strong>90% 的“让 Agent 懂我的资料”需求，先用 RAG；微调是后面才考虑的事。</div>
+
+        <h2>常见疑问</h2>
+        <div class="qa"><b>Q：RAG 能完全消除幻觉吗？</b><br>A：不能，但能大幅减少。前提是资料里有答案；若资料里没有，模型仍可能硬答。对策：指令写“资料没有就直说不知道”，并让它标注来源。</div>
+        <div class="qa"><b>Q：一定要向量数据库吗？</b><br>A：资料少（几百条以内）可以先全量塞或关键词检索；资料一多、要语义检索，就上向量库。先跑通再优化。</div>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 12 分钟）</h2>
+          <ol>
+            <li>画出你自己资料的 RAG 流程：输入 3 篇你常用的文档，标出“切块→向量→检索→生成”每一步。</li>
+            <li>找一个支持“上传文档问答”的工具，上传一份文档问 3 个细节问题，检查它答得对不对、有没有标来源。</li>
+            <li>思考：你的资料里哪类问题 RAG 能答好，哪类答不好？（答不好的往往是跨多篇综合推理的问题）</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>RAG</span><span>先检索资料，再让 LLM 基于资料回答</span>
+            <span>全流程</span><span>切块 → 向量化 → 检索 Top-K → 拼进上下文 → 生成（带来源）</span>
+            <span>对比微调</span><span>资料常更新选 RAG；固定风格/内化知识才考虑微调</span>
+            <span>防幻觉</span><span>资料没有就直说 + 强制标来源 + 程序侧校验</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：RAG 的地基——Embedding 和向量数据库到底怎么“理解意思”？做一个小实验亲手感受。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

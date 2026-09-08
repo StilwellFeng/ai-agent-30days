@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 19 · 多 Agent 协作入门 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 19 / 30 · 第三周 · 工程化开发</div>
+        <h1>多 Agent 协作入门</h1>
+        <p class="sub">一个 Agent 单打独斗，多个 Agent 像一家公司。今天学三种协作模式，以及“什么时候其实不需要多 Agent”。</p>
+        <div class="goal"><span class="chip">🎯 目标：理解三种协作模式与适用边界</span><span class="chip">⏱ 30 分钟</span></div>
+      </header>
+      <article>
+        <p class="lead">多 Agent 就是把大任务拆给多个“角色”协作：一个负责查资料、一个负责写、一个负责挑毛病。听起来很酷，但<strong>它同时放大了成本、延迟和失控风险</strong>——先用好单 Agent，再考虑多 Agent。</p>
+
+        <h2>三种常见协作模式</h2>
+        <figure><div class="frame"><img src="../diagrams/d19-multiagent.svg" alt="多 Agent 三种协作模式"></div>
+        <figcaption>图 19-1　主管-员工 / 流水线 / 辩论评审——先想清楚你的任务属于哪种</figcaption></figure>
+
+        <h2>每种模式的适用与代价</h2>
+        <table>
+          <tr><th>模式</th><th>适用</th><th>主要代价/坑</th></tr>
+          <tr><td>主管-员工</td><td>任务可自然分成多个专业方向</td><td>上下文传递易丢；主管可能“一言堂”</td></tr>
+          <tr><td>流水线</td><td>流程清晰、可分段质检</td><td>上一步错了会一路放大</td></tr>
+          <tr><td>辩论/评审</td><td>需要多角度把关的决策</td><td>最贵最慢，易陷入“礼貌附和”</td></tr>
+        </table>
+
+        <h2>三个“先别上多 Agent”的信号</h2>
+        <ul>
+          <li>单 Agent + 好提示词 + 工具就能搞定 → 别加复杂度。</li>
+          <li>你还没办法稳定评测单 Agent 的效果 → 多 Agent 只会更难排查。</li>
+          <li>任务其实只是“多次调用同一流程” → 那是循环/批处理，不是协作。</li>
+        </ul>
+
+        <h2>让协作不跑偏的工程要点</h2>
+        <ol>
+          <li><strong>角色边界写清楚</strong>：每个 Agent 的系统提示词里写明“你只负责 X，不负责 Y”。</li>
+          <li><strong>交接用结构化消息</strong>：传 JSON/明确字段，别传散文。</li>
+          <li><strong>设轮次上限</strong>：主管和员工最多来回几次？辩论最多几轮？写死。</li>
+          <li><strong>留人类裁判</strong>：最终交付前，由人或规则把关，而不是“Agent 们自己觉得行了”。</li>
+        </ol>
+
+        <div class="callout warn"><strong>⚠️ 最容易被低估的成本：</strong>多 Agent 的 Token 消耗是“指数级”的——每多一个角色、多一轮来回，都在烧钱烧时间。先估算：同样的任务单 Agent 多少钱、多 Agent 多少钱。</div>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 12 分钟）</h2>
+          <ol>
+            <li>拿你的毕业设计任务，尝试用“主管-员工”拆成 3 个角色，写出各自职责边界。</li>
+            <li>为每个角色写一句“你只负责…不负责…”的系统提示词片段。</li>
+            <li>估算：3 个角色、每角色来回 2 次，大概要多少次模型调用？这让你重新考虑了吗？</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>三模式</span><span>主管-员工 / 流水线 / 辩论评审</span>
+            <span>原则</span><span>能单 Agent 就别多 Agent；多 Agent 是手段不是目的</span>
+            <span>防跑偏</span><span>角色边界写死 · 结构化交接 · 轮次上限 · 人类裁判</span>
+            <span>成本警钟</span><span>调用次数与 Token 会成倍上涨，先算账</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：让 Agent “下回还记得你”——记忆与状态持久化实战，从对话历史到用户画像。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

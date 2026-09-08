@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 25 · 多模态 Agent 初探 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 25 / 30 · 第四周 · 实战与毕业设计</div>
+        <h1>多模态 Agent 初探：文字之外的世界</h1>
+        <p class="sub">能看图、能听音、能操作界面的 Agent 正在成为现实。今天建立多模态的认知地图和判断力。</p>
+        <div class="goal"><span class="chip">🎯 目标：理解多模态的形态、能力边界与工程思路</span><span class="chip">⏱ 30 分钟</span></div>
+      </header>
+      <article>
+        <p class="lead">到目前为止，我们处理的都是文字。但真实世界是图片、语音、视频、操作界面的。<strong>多模态 = 让 Agent 能“看”“听”“点”</strong>，感知和行动的通道变多了。</p>
+
+        <h2>多模态的三种形态</h2>
+        <figure><div class="frame"><img src="../diagrams/d25-multimodal.svg" alt="多模态 Agent 的输入输出形态"></div>
+        <figcaption>图 25-1　输入侧多模态（看懂图/听懂话）→ 输出侧多模态（生成图/语音）→ 行动侧多模态（操作界面）</figcaption></figure>
+
+        <h2>三种能力，三种成熟度</h2>
+        <table>
+          <tr><th>能力</th><th>典型场景</th><th>现状判断</th></tr>
+          <tr><td>视觉理解</td><td>读报表/截图/发票、看图表说话</td><td>较成熟，可直接用于“把图转成结构化数据”</td></tr>
+          <tr><td>语音</td><td>会议转写、语音助手（先转文字再处理）</td><td>成熟；注意说话人区分、口音与隐私</td></tr>
+          <tr><td>操作界面（Computer Use）</td><td>替用户点网页、操作软件</td><td>进展快但易错、慢、贵，务必人工监督</td></tr>
+        </table>
+
+        <h2>工程思路：别硬上，先“降维”</h2>
+        <ol>
+          <li><strong>能不识别就不识别</strong>：能拿到结构化数据（API/表格）就别 OCR/看图。</li>
+          <li><strong>多模态 → 文本再进主流程</strong>：截图 → 让模型转成文字/JSON → 后续仍走你熟悉的文本 Agent 流程。这是当前最稳的架构。</li>
+          <li><strong>界面操作用在“封闭受控环境”</strong>：先在自己可控的网页/沙箱里试，别一上来操作生产系统。</li>
+        </ol>
+
+        <div class="callout warn"><strong>⚠️ 风险提醒：</strong>界面操作类 Agent 一旦跑偏，可能点到删除、误发消息。务必：只读优先、危险操作确认、全程录屏可回溯、设步数上限。</div>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 12 分钟）</h2>
+          <ol>
+            <li>找一个能“读图”的 AI 助手，给它一张你手机里的截图（如账单/报表），让它输出结构化信息，检查准确率。</li>
+            <li>设计一个“多模态降维”流程：截图 → 提取文字/JSON → 交给文本 Agent → 得到什么结果？画出来。</li>
+            <li>想一个你工作中“如果能看懂图片/屏幕就能自动化”的场景，评估它的风险等级。</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>三种形态</span><span>视觉理解 · 语音 · 界面操作</span>
+            <span>架构心法</span><span>多模态 → 先转结构化文本 → 再走文本 Agent 主流程（最稳）</span>
+            <span>成熟度</span><span>看图较成熟 · 语音成熟 · 操作界面易错需监督</span>
+            <span>铁律</span><span>受控环境试用 · 危险操作确认 · 可回溯</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：实战——办公自动化 Agent：读写文档/表格/邮件，让 Agent 帮你干活而不是陪你聊天。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 18 · 多工具与多步骤任务编排 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 18 / 30 · 第三周 · 工程化开发</div>
+        <h1>多工具与多步骤任务编排</h1>
+        <p class="sub">工具一多、步骤一长，Agent 就容易“乱”。今天学编排的工程方法，让它多而不乱。</p>
+        <div class="goal"><span class="chip">🎯 目标：掌握步骤交接、重试与失败分支的设计</span><span class="chip">⏱ 30 分钟</span></div>
+      </header>
+      <article>
+        <p class="lead">当 Agent 有 5 个工具、任务要串 6 步时，最大的风险不是“模型不够聪明”，而是<strong>步骤之间数据交接不清、某一步失败后没有出路</strong>。编排 = 提前把这些路设计好。</p>
+
+        <h2>一个多步骤任务的例子</h2>
+        <p>“每天收集行业新闻 → 按我的兴趣过滤 → 总结成简报 → 发到邮箱”：</p>
+        <figure><div class="frame"><img src="../diagrams/d18-orchestration.svg" alt="多步骤任务编排与交接"></div>
+        <figcaption>图 18-1　每步把“结构化输出”交给下一步，而不是甩一段聊天文字</figcaption></figure>
+
+        <h2>四个工程要点</h2>
+        <ol>
+          <li><strong>结构化交接</strong>：步骤输出用 JSON/明确字段（如 <code>{"items":[...], "source":...}</code>），下一步直接解析。纯文本交接是事故源头。</li>
+          <li><strong>失败分支</strong>：每步想好“失败了怎么办”——重试 N 次？跳过？通知人工？还是整体中止？别让 Agent 现场瞎编。</li>
+          <li><strong>可观测</strong>：记录每步的输入/输出/耗时/成本。排查“哪一步把数据搞坏了”全靠日志。</li>
+          <li><strong>人工检查点</strong>：高风险步骤（发邮件、付款、删除）之前停下来让用户确认。</li>
+        </ol>
+
+        <h2>两种编排风格（按需选择）</h2>
+        <table>
+          <tr><th></th><th>代码编排（确定性强）</th><th>模型编排（灵活性强）</th></tr>
+          <tr><td>谁决定下一步</td><td>你的代码按流程图走</td><td>LLM 根据情况现场选</td></tr>
+          <tr><td>适合</td><td>流程固定、步骤明确</td><td>开放式、路线不固定</td></tr>
+          <tr><td>风险</td><td>死板、覆盖不全</td><td>乱走、难预测</td></tr>
+          <tr><td>实践</td><td>先写死流程，稳了再说</td><td>加步数/预算护栏</td></tr>
+        </table>
+        <div class="callout tip"><strong>💡 实战建议：</strong>大部分项目用<strong>“代码定骨架 + 模型填内容”</strong>：固定的流程用代码写死（可靠），每个环节里需要理解/生成的地方才交给 LLM（灵活）。别让模型从头到尾自由发挥。</div>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 12 分钟）</h2>
+          <ol>
+            <li>画出你 Day 21 要做“信息收集助手”的流程图：标出每一步的输入/输出格式与失败分支。</li>
+            <li>给每个步骤想一句“验收标准”：怎么判断这一步做成功了？</li>
+            <li>挑出其中“必须人工确认”的步骤，说明原因。</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>编排的本质</span><span>把“步骤怎么交接、失败怎么走”提前设计好</span>
+            <span>四要点</span><span>结构化交接 · 失败分支 · 可观测 · 人工检查点</span>
+            <span>两风格</span><span>代码编排（稳）vs 模型编排（活）；推荐“代码骨架 + 模型填空”</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：一个 Agent 不够用时怎么办？入门多 Agent 协作——分工模式、适用场景与坑。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

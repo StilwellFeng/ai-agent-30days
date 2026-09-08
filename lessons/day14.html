@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 14 · 本周实战：个人学习笔记问答助手 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 14 / 30 · 第二周收官 · 实战</div>
+        <h1>本周实战：个人学习笔记问答助手</h1>
+        <p class="sub">第二周收官：把提示词、上下文、工具、检索、规划串成一个真实项目——你的笔记，随问随答。</p>
+        <div class="goal"><span class="chip">🎯 目标：完成一个可运行 MVP 的设计与最小实现</span><span class="chip">⏱ 60–90 分钟</span><span class="chip">💻 可选动手</span></div>
+      </header>
+      <article>
+        <p class="lead">很多人的笔记“记了不看”。这个实战让笔记变“活”：<strong>上传/指向你的笔记文件夹，然后像聊天一样问“我上次总结的 Agent 四要素是什么？”</strong>它去笔记里找答案并标注出处。</p>
+
+        <h2>系统设计</h2>
+        <figure><div class="frame"><img src="../diagrams/d14-qa-arch.svg" alt="个人学习笔记问答助手架构"></div>
+        <figcaption>图 14-1　整体 = 离线索引 + 在线问答，组件你在前 6 课都见过</figcaption></figure>
+
+        <h2>开发步骤（建议照此推进）</h2>
+        <ol>
+          <li><strong>定范围</strong>：先支持 Markdown 笔记；目标问题类型：“某篇笔记讲了什么”“我关于 X 记过什么”。</li>
+          <li><strong>读取与切块</strong>：遍历笔记目录 → 按标题切块，每块记录 <code>来源文件 + 标题</code>。用纯 Python 就能写。</li>
+          <li><strong>索引</strong>：方案 A（零依赖）用关键词/二元组做“玩具索引”，先跑通流程；方案 B（进阶）装向量库，把每块转成向量。</li>
+          <li><strong>问答</strong>：检索 Top-3 块 → 组装系统提示词（“只能依据资料回答，注明来源；资料没有就直说”）→ 调 LLM。</li>
+          <li><strong>迭代</strong>：用 10 个真实问题测试，记录“答错/找不到/答非所问”，逐个调切块大小与检索数量。</li>
+        </ol>
+
+        <h2>最小版本的系统提示词（可直接改着用）</h2>
+        <pre>你是用户的个人笔记助手。
+请只根据下面提供的笔记片段回答；如果片段里没有答案，直接说“笔记里没有相关内容”，不要编造。
+回答末尾标注来源（文件名）。
+笔记片段：
+--- 片段 1（来自：AI-Agent-笔记.md）
+…
+--- 片段 2（来自：提示词-笔记.md）
+…
+用户问题：…</pre>
+
+        <h2>做完之后的三个自检问题</h2>
+        <ul>
+          <li>问一个<strong>笔记里没有</strong>的问题——它有没有诚实说“没有”？</li>
+          <li>问一个<strong>需要跨两篇笔记综合</strong>的问题——它答得如何？这是 RAG 的常见难点。</li>
+          <li>问一个<strong>字面不同但意思相同</strong>的问题——向量版是否能比关键词版找到？</li>
+        </ul>
+
+        <div class="callout tip"><strong>💡 分阶段心态：</strong>今天先跑通“方案 A 纯本地最小版”（不装任何库也能做：读目录 + 关键词找块 + 把块发给任意 LLM 网页版人工粘贴也行）。向量版留到 Day 27 完整项目再上。先有闭环，再谈优化。</div>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 30–60 分钟）</h2>
+          <ol>
+            <li>用纸笔画出你的笔记问答助手的<strong>模块与数据流</strong>（参照图 14-1，标出你的笔记格式）。</li>
+            <li>实现“方案 A”：写一个脚本列出目录、按标题切块、用关键词找最相关的 3 块并打印出来（纯 Python，约 40 行）。</li>
+            <li>把找到的块 + 问题贴给任意 LLM，加上面的系统提示词，验证“带来源回答”是否成立。</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>项目本质</span><span>笔记 → 切块 → 索引 → 检索 → 带来源问答</span>
+            <span>两周所学都用上了</span><span>提示词（系统提示词）· 上下文（只放相关块）· 检索（向量/关键词）· 规划（流程固定）</span>
+            <span>MVP 原则</span><span>先零依赖跑通闭环，再上向量库与框架</span>
+            <span>自检</span><span>“没有就说没有”“跨篇综合”“换说法能查到”</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">下周预告：进入第三周“工程化”——认识 LangChain / LlamaIndex 等框架，看看它们帮我们省了哪些重复劳动。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

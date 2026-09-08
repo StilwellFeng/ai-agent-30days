@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 430" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <text x="440" y="36" font-size="19" font-weight="700" fill="#1f2430" text-anchor="middle">Agent 框架解决什么问题？—— 分层看</text>
+
+  <rect x="60" y="70" width="760" height="72" rx="14" fill="#fdf2f8" stroke="#ec4899" stroke-width="2"/>
+  <text x="440" y="100" font-size="16" font-weight="700" fill="#be185d" text-anchor="middle">你的应用（业务逻辑）</text>
+  <text x="440" y="126" font-size="13" fill="#9d174d" text-anchor="middle">“帮我把周报写成 PPT 大纲”“回答我笔记里的问题”—— 只有你最懂</text>
+
+  <rect x="60" y="162" width="760" height="72" rx="14" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+  <text x="440" y="192" font-size="16" font-weight="700" fill="#4338ca" text-anchor="middle">Agent 框架（LangChain / LlamaIndex 等）</text>
+  <text x="440" y="218" font-size="13" fill="#475569" text-anchor="middle">把“接模型、拼提示词、调工具、存记忆、做检索”这些重复劳动封装成积木</text>
+
+  <rect x="60" y="254" width="760" height="72" rx="14" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <text x="440" y="284" font-size="16" font-weight="700" fill="#0f766e" text-anchor="middle">底层能力（模型 / 工具 / 存储）</text>
+  <text x="440" y="310" font-size="13" fill="#115e59" text-anchor="middle">各家 LLM API、搜索引擎、向量数据库、文件系统 —— 框架帮你“接线”</text>
+
+  <rect x="120" y="352" width="640" height="52" rx="14" fill="#fff" stroke="#94a3b8" stroke-width="1.6"/>
+  <text x="440" y="383" font-size="14" fill="#475569" text-anchor="middle">框架的取舍：上手快、生态全；但抽象层也会“屏蔽细节”，要能看懂它包了什么</text>
+</svg>

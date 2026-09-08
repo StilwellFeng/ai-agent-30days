@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 27 · 实战：个人知识库 + 问答 Agent 完整项目 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 27 / 30 · 第四周 · 实战与毕业设计</div>
+        <h1>实战：个人知识库 + 问答 Agent 完整项目</h1>
+        <p class="sub">Day 14 的笔记问答助手升级为完整项目：多格式资料、混合检索、多轮对话、评测回归。</p>
+        <div class="goal"><span class="chip">🎯 目标：交付一个可日常使用的知识库问答 Agent</span><span class="chip">⏱ 90–120 分钟</span><span class="chip">💻 完整开发</span></div>
+      </header>
+      <article>
+        <p class="lead">这是把你 26 天所学“焊”成一件作品的日子。目标不是“代码多酷”，而是<strong>解决你自己的真实问题</strong>——让积累的资料真正能被问起来。</p>
+
+        <h2>系统组成</h2>
+        <figure><div class="frame"><img src="../diagrams/d27-project.svg" alt="知识库问答 Agent 系统组成"></div>
+        <figcaption>图 27-1　资料接入 → 检索问答 → Agent 外壳 → 评测回归</figcaption></figure>
+
+        <h2>分阶段执行表</h2>
+        <table>
+          <tr><th>阶段</th><th>做什么</th><th>验收标准</th></tr>
+          <tr><td>0. 范围</td><td>选 1 类资料（如你的 Markdown 笔记）</td><td>明确支持/不支持的文件类型</td></tr>
+          <tr><td>1. 接入</td><td>读取 → 切块 → 向量化入库</td><td>能打印出“共 N 块，来自 M 个文件”</td></tr>
+          <tr><td>2. 检索</td><td>混合检索 Top-5</td><td>10 个测试问题都能找回相关块</td></tr>
+          <tr><td>3. 问答</td><td>系统提示词 + 多轮 + 带来源</td><td>能多轮追问，答案有出处</td></tr>
+          <tr><td>4. 评测</td><td>建 20 条测试集跑分</td><td>成功率记录在案，能对比前后版本</td></tr>
+          <tr><td>5. 打磨</td><td>按失败案例调切块/提示词/检索</td><td>至少修好 3 个典型失败</td></tr>
+        </table>
+
+        <h2>系统提示词（知识库问答版）</h2>
+        <pre>你是用户的个人知识助手。
+1. 只依据下面检索到的片段回答；片段没有就直说“资料里没有”，绝不编造。
+2. 每条结论标注来源（文件名/章节）。
+3. 用户追问时，结合上一轮上下文，不要重复已说内容。
+4. 若问题需要多篇资料综合，先说明“这需要综合以下资料”，再作答。
+[检索片段…]</pre>
+
+        <h2>三个“让项目不烂尾”的建议</h2>
+        <ul>
+          <li><strong>先小后大</strong>：先只支持 Markdown，跑顺了再加 PDF/网页；先本地跑通，再谈部署。</li>
+          <li><strong>每天真用</strong>：把 Agent 当成日常工具用一周，真实使用会暴露测试集想不到的问题。</li>
+          <li><strong>记录迭代日志</strong>：每次改动记一句“改了啥、成功率从多少到多少”——这就是你的作品集亮点。</li>
+        </ul>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 60 分钟）</h2>
+          <ol>
+            <li>按上表完成阶段 0–3（至少到“检索问答能跑通”）。</li>
+            <li>写 10 条测试问题并人工打分，记录首次成功率。</li>
+            <li>挑最典型的 3 个失败案例，各想一个改进假设（改切块？改提示词？改检索？）。</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>五阶段</span><span>范围 → 接入 → 检索 → 问答 → 评测打磨</span>
+            <span>提示词关键</span><span>只依据片段 + 没有就说没有 + 标注来源</span>
+            <span>防烂尾</span><span>先小后大 · 日常真用 · 迭代留日志</span>
+            <span>下一步</span><span>Day 28 把它部署成别人也能访问的服务</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：部署你的 Agent——本地起服务、加一个简单聊天界面，让作品“可展示”。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

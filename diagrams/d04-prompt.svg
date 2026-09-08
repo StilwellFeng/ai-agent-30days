@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <text x="440" y="36" font-size="19" font-weight="700" fill="#1f2430" text-anchor="middle">一个“能干活”的提示词 = 讲清楚 5 件事</text>
+
+  <!-- blocks -->
+  <rect x="60" y="64" width="760" height="64" rx="14" fill="#fff" stroke="#4f46e5" stroke-width="2"/>
+  <text x="92" y="105" font-size="14.5" font-weight="700" fill="#4338ca">① 角色</text>
+  <text x="240" y="105" font-size="13.5" fill="#475569">“你是一位资深数据分析师” —— 给模型一个身份与立场</text>
+
+  <rect x="60" y="142" width="760" height="64" rx="14" fill="#fff" stroke="#0d9488" stroke-width="2"/>
+  <text x="92" y="183" font-size="14.5" font-weight="700" fill="#0f766e">② 背景</text>
+  <text x="240" y="183" font-size="13.5" fill="#475569">“我们团队 30 人，季度销售额如下…” —— 提供必要上下文</text>
+
+  <rect x="60" y="220" width="760" height="64" rx="14" fill="#fff" stroke="#d97706" stroke-width="2"/>
+  <text x="92" y="261" font-size="14.5" font-weight="700" fill="#b45309">③ 任务</text>
+  <text x="240" y="261" font-size="13.5" fill="#475569">“请找出增长最快的两个产品线，并解释原因” —— 具体动词 + 对象</text>
+
+  <rect x="60" y="298" width="760" height="64" rx="14" fill="#fff" stroke="#ec4899" stroke-width="2"/>
+  <text x="92" y="339" font-size="14.5" font-weight="700" fill="#be185d">④ 要求</text>
+  <text x="240" y="339" font-size="13.5" fill="#475569">“只基于给定数据，不要编造；控制在 200 字内” —— 约束与禁区</text>
+
+  <rect x="60" y="376" width="760" height="64" rx="14" fill="#fff" stroke="#7c3aed" stroke-width="2"/>
+  <text x="92" y="417" font-size="14.5" font-weight="700" fill="#6d28d9">⑤ 输出格式</text>
+  <text x="240" y="417" font-size="13.5" fill="#475569">“用表格：产品线 | 增长率 | 原因；最后给一句结论” —— 告诉它怎么交卷</text>
+
+  <rect x="60" y="462" width="760" height="46" rx="12" fill="#f6f7fb" stroke="#e5e8ef"/>
+  <text x="440" y="491" font-size="13.5" fill="#66707f" text-anchor="middle">小技巧：再给 1–2 个“例子”（Few-shot），模型会更稳</text>
+</svg>

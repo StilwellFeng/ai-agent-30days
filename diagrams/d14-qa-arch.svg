@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 340" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <defs><marker id="Q" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4f46e5"/></marker></defs>
+  <text x="440" y="34" font-size="19" font-weight="700" fill="#1f2430" text-anchor="middle">Day 14 实战目标：个人学习笔记问答助手</text>
+
+  <rect x="40" y="80" width="180" height="100" rx="14" fill="#fff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="130" y="118" font-size="15" font-weight="700" fill="#334155" text-anchor="middle">你的笔记</text>
+  <text x="130" y="146" font-size="12.5" fill="#475569" text-anchor="middle">Markdown / 文档</text>
+  <text x="130" y="168" font-size="12.5" fill="#94a3b8" text-anchor="middle">（几十到几百篇）</text>
+  <line x1="220" y1="130" x2="262" y2="130" stroke="#4f46e5" stroke-width="2" marker-end="url(#Q)"/>
+
+  <rect x="266" y="80" width="200" height="100" rx="14" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <text x="366" y="112" font-size="15" font-weight="700" fill="#0f766e" text-anchor="middle">切块 + 向量化</text>
+  <text x="366" y="138" font-size="12.5" fill="#115e59" text-anchor="middle">小标题感知地切分，</text>
+  <text x="366" y="160" font-size="12.5" fill="#115e59" text-anchor="middle">每块带“来源文件名”</text>
+  <line x1="466" y1="130" x2="508" y2="130" stroke="#4f46e5" stroke-width="2" marker-end="url(#Q)"/>
+
+  <rect x="512" y="80" width="200" height="100" rx="14" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+  <text x="612" y="112" font-size="15" font-weight="700" fill="#4338ca" text-anchor="middle">向量数据库</text>
+  <text x="612" y="138" font-size="12.5" fill="#475569" text-anchor="middle">存好所有笔记片段</text>
+  <text x="612" y="160" font-size="12.5" fill="#475569" text-anchor="middle">等待被检索</text>
+  <line x1="612" y1="180" x2="612" y2="210" stroke="#4f46e5" stroke-width="2" marker-end="url(#Q)"/>
+
+  <rect x="300" y="214" width="280" height="86" rx="14" fill="#fdf2f8" stroke="#ec4899" stroke-width="2"/>
+  <text x="440" y="246" font-size="15" font-weight="700" fill="#be185d" text-anchor="middle">问答：检索 + LLM 作答</text>
+  <text x="440" y="274" font-size="12.5" fill="#9d174d" text-anchor="middle">问题→找 3–5 段→拼给 LLM→带来源回答</text>
+
+  <rect x="120" y="60" width="80" height="26" rx="8" fill="#f6f7fb" stroke="#e5e8ef"/>
+  <text x="160" y="78" font-size="12" fill="#66707f" text-anchor="middle">用户</text>
+  <line x1="160" y1="86" x2="160" y2="108" stroke="#66707f" stroke-width="1.5"/>
+  <line x1="440" y1="300" x2="160" y2="300" stroke="#ec4899" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#Q)"/>
+  <text x="300" y="292" font-size="12" fill="#9d174d" text-anchor="middle">回答 + 出处</text>
+</svg>

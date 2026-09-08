@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 5 · 工具调用：让 Agent 长出“手脚” | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 5 / 30 · 零基础入门</div>
+        <h1>工具调用：让 Agent 长出“手脚”</h1>
+        <p class="sub">LLM 只会“说”，工具让它能“做”。这是 Agent 区别于聊天机器人的关键一步。</p>
+        <div class="goal">
+          <span class="chip">🎯 目标：理解 Function Calling 闭环与安全边界</span>
+          <span class="chip">⏱ 预计 30 分钟</span>
+          <span class="chip">📖 无代码（有示意）</span>
+        </div>
+      </header>
+
+      <article>
+        <p class="lead">还记得 Day 2 里 LLM 的三个短板吗？<strong>没有实时信息、不能精确计算、不能自己行动</strong>。工具（Tools）就是来补这三个短板的：LLM 负责“想”，你的程序负责“做”。</p>
+
+        <h2>核心机制：Function Calling（函数调用）</h2>
+        <p>别被英文吓到，机制一句话就能讲清：<strong>模型不直接执行任何操作，它只是输出一段“我想调用某某工具、传这些参数”的结构化指令，由你的程序真正去执行，再把结果还给它。</strong></p>
+        <figure>
+          <div class="frame"><img src="../diagrams/d05-tool.svg" alt="Function Calling 闭环：用户-模型-工具-结果回填-回答"></div>
+          <figcaption>图 5-1　闭环四步：LLM 决定调哪个工具 → 程序执行 → 结果回填 → LLM 基于真实结果作答</figcaption>
+        </figure>
+
+        <h2>工具长什么样？—— 先看“工具清单”</h2>
+        <p>一个 Agent 能调哪些工具，通常由开发者提前“注册”好。常见工具类型：</p>
+        <table>
+          <tr><th>工具</th><th>典型能力</th><th>解决 LLM 的哪个短板</th></tr>
+          <tr><td>网络搜索</td><td>查最新信息、新闻、网页</td><td>知识过期 / 无实时信息</td></tr>
+          <tr><td>计算器 / 代码执行</td><td>精确计算、跑脚本、处理数据</td><td>算不准、不会真执行</td></tr>
+          <tr><td>API 连接器</td><td>天气、地图、支付、企业系统</td><td>接触不到外部系统</td></tr>
+          <tr><td>文件读写</td><td>读 PDF/Excel/Word，生成文档</td><td>处理不了私有文件</td></tr>
+          <tr><td>数据库查询</td><td>查业务数据</td><td>拿不到企业内部数据</td></tr>
+          <tr><td>消息/邮件</td><td>发通知、发邮件</td><td>无法替用户“办事”</td></tr>
+        </table>
+
+        <h2>程序怎么“告诉”模型有哪些工具？</h2>
+        <p>每个工具都会配一份“说明书”（名称、功能、参数），随请求一起发给模型。示意（不同平台的写法略有差异，以官方文档为准）：</p>
+        <pre>{
+  "name": "get_weather",
+  "description": "查询指定城市的实时天气",
+  "parameters": {
+    "city":   { "type": "string", "description": "城市名，如：北京" },
+    "date":   { "type": "string", "description": "日期，默认今天" }
+  }
+}</pre>
+        <p>模型看完清单后，如果觉得需要查天气，就会“回答”一段类似 <code>调用 get_weather(city="北京")</code> 的指令，而不是直接编一个天气给你——<strong>这就是从“聊天”到“干活”的转折点</strong>。</p>
+
+        <h2>工具不是越多越好</h2>
+        <ul>
+          <li>工具清单太长 → 模型“选择困难”，容易挑错、变慢、更费 Token。</li>
+          <li>工具描述要写清楚“什么时候用它、什么时候别用它”。</li>
+          <li>同名工具、模糊描述会让模型误调用——<strong>质量 &gt; 数量</strong>。</li>
+        </ul>
+
+        <div class="callout warn">
+          <strong>🔐 安全边界（今天就要建立的意识）：</strong>
+          <ul style="margin:8px 0 0">
+            <li><strong>最小权限</strong>：只给 Agent 完成任务所需的最小工具权限，别一上来就开放“删文件”“转账”。</li>
+            <li><strong>危险操作人工确认</strong>：付款、发邮件、删除等操作，设计成“先征求用户同意”。</li>
+            <li><strong>输入校验</strong>：工具收到的参数可能被恶意构造（Prompt 注入），程序侧要做校验与白名单（第 29 天专题）。</li>
+            <li><strong>可观测</strong>：记录 Agent 每一步调了哪个工具、传了什么参数，出问题才能查。</li>
+          </ul>
+        </div>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 10 分钟）</h2>
+          <ol>
+            <li>打开一个支持联网/工具的 AI 助手，问一个“只有查了才知道”的问题（如“今天上海有什么展览”），观察它是否先搜索再回答。</li>
+            <li>针对你 Day 1 记下的那个任务，列出它需要哪 3 个工具，每个工具写一句“描述”和需要的参数。</li>
+            <li>想一想：其中有没有“危险工具”？你会怎么加一道人工确认？</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>Function Calling</span><span>模型输出“调哪个工具、传什么参数”的指令，程序真正执行</span>
+            <span>闭环</span><span>LLM 决定 → 程序执行 → 结果回填 → LLM 基于真实结果作答</span>
+            <span>工具的意义</span><span>补上 LLM 的实时性、精确性、行动力短板</span>
+            <span>铁律</span><span>最小权限 · 危险操作人工确认 · 输入校验 · 全程可观测</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：Agent 干活时怎么“记住”前因后果？学习记忆机制：短期、长期与向量检索。</p>
+      </article>
+
+      <div class="pager">
+        <a id="prev-link" href="#"></a>
+        <a id="next-link" href="#"></a>
+      </div>
+      <div class="checkin">
+        <button id="checkin-btn">完成本课打卡</button>
+        <small>打卡进度保存在本机浏览器</small>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

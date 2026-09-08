@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 12 · Embedding 与向量数据库上手 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 12 / 30 · 第二周 · 让 Agent 更聪明</div>
+        <h1>Embedding 与向量数据库上手</h1>
+        <p class="sub">RAG 的地基：文字怎么变成“坐标”？又是怎么被快速找到的？今天一次讲透。</p>
+        <div class="goal"><span class="chip">🎯 目标：理解 Embedding、相似度与向量库的用途</span><span class="chip">⏱ 30 分钟</span></div>
+      </header>
+      <article>
+        <p class="lead">上一课 RAG 里有个关键步骤“向量化”。它背后是 <strong>Embedding（嵌入）</strong>：把一段文字变成一串数字（向量），让“意思相近”的文字在数字空间里也“靠得近”。</p>
+
+        <h2>文字 → 坐标：一个类比</h2>
+        <figure><div class="frame"><img src="../diagrams/d12-embedding.svg" alt="Embedding 将文字映射为向量空间中的点"></div>
+        <figcaption>图 12-1　Embedding 模型把语义映射到高维空间；我们用人能懂的 2D/3D 来理解“语义相近 = 距离近”</figcaption></figure>
+        <p>关键不是“向量有多神秘”，而是它把<strong>“像不像”变成了“距离远近”</strong>——这是可以计算的。于是“找相关资料”就变成了“找最近的几个点”。</p>
+
+        <h2>实践中的组件（先认识，用的时候查文档）</h2>
+        <table>
+          <tr><th>组件</th><th>作用</th><th>常见选择（真实存在的常用工具）</th></tr>
+          <tr><td>Embedding 模型</td><td>文字 → 向量</td><td>各家大模型厂商的 embedding 接口、开源模型（如 sentence-transformers）</td></tr>
+          <tr><td>向量数据库</td><td>存海量向量 + 快速找最近邻</td><td>Chroma、FAISS、Qdrant、Milvus、pgvector</td></tr>
+          <tr><td>编排</td><td>串起切块/检索/问答</td><td>LangChain、LlamaIndex（Day 15 起介绍）</td></tr>
+        </table>
+        <div class="callout tip"><strong>💡 学习策略：</strong>这些库更新很快、API 经常变。<strong>不要背 API，要背“流程”。</strong>做项目时直接查官方文档/示例，比记忆更可靠。</div>
+
+        <h2>向量检索的两个常见误区</h2>
+        <ul>
+          <li><strong>误区 1：向量检索万能。</strong>它对“意思接近”很在行，但对“精确数字、编号、专名”可能不如关键词。生产系统常用<strong>混合检索</strong>（关键词 BM25 + 向量）互补。</li>
+          <li><strong>误区 2：向量维度越高越好。</strong>高维更精细但更占资源；够用就好。</li>
+        </ul>
+
+        <h2>动手感受“语义相近”</h2>
+        <p>不用装任何库，回到 Day 7 的迷你 Agent，它的 <code>recall()</code> 就是一次“玩具版语义检索”：把句子拆成中文二元组当“特征”，找重叠最多的记忆。跑一下：</p>
+        <pre>python3 code/mini_agent.py
+&gt; 记住 我住在上海
+&gt; 我想起我住在哪      # 能找到“我住在上海”，尽管字不完全一样</pre>
+        <p>真正的 Embedding 只是把“特征”从手工二元组换成模型学出来的高维语义向量——<strong>原理是同一件事。</strong></p>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 12 分钟）</h2>
+          <ol>
+            <li>运行 Day 7 迷你 Agent，试 3 组“换说法提问”，看记忆检索的召回效果与局限。</li>
+            <li>打开任一“上传文档问答”工具，问一个“字面完全不同但意思相同”的问题，感受向量检索的威力。</li>
+            <li>在笔记里写清：你的项目里，哪些资料适合向量检索、哪些必须精确匹配（如订单号）。</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>Embedding</span><span>文字 → 向量；语义相近 → 距离近 → 可计算</span>
+            <span>相似度</span><span>常用余弦相似度：方向越一致越相似</span>
+            <span>向量数据库</span><span>为“海量向量找最近邻”而生（Chroma/FAISS/Qdrant/pgvector 等）</span>
+            <span>工程提醒</span><span>混合检索更稳：向量找意思 + 关键词找精确</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：Agent 怎么“自己想办法”？学规划能力——任务拆解、ReAct 与自我反思。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

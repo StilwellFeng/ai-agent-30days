@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 360" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <defs><marker id="E" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4f46e5"/></marker></defs>
+  <text x="440" y="34" font-size="19" font-weight="700" fill="#1f2430" text-anchor="middle">怎么知道 Agent 变好了？—— 评测闭环</text>
+
+  <rect x="40" y="80" width="180" height="120" rx="14" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+  <text x="130" y="112" font-size="15" font-weight="700" fill="#4338ca" text-anchor="middle">① 建测试集</text>
+  <text x="130" y="140" font-size="12.5" fill="#475569" text-anchor="middle">50–100 个真实问题 +</text>
+  <text x="130" y="160" font-size="12.5" fill="#475569" text-anchor="middle">期望答案/通过标准</text>
+  <text x="130" y="180" font-size="12" fill="#94a3b8" text-anchor="middle">（含失败案例，防回归）</text>
+  <line x1="220" y1="140" x2="262" y2="140" stroke="#4f46e5" stroke-width="2" marker-end="url(#E)"/>
+
+  <rect x="266" y="80" width="180" height="120" rx="14" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <text x="356" y="112" font-size="15" font-weight="700" fill="#0f766e" text-anchor="middle">② 跑评测</text>
+  <text x="356" y="140" font-size="12.5" fill="#115e59" text-anchor="middle">把测试集喂给 Agent</text>
+  <text x="356" y="160" font-size="12.5" fill="#115e59" text-anchor="middle">记录每一步输出/成本</text>
+  <line x1="446" y1="140" x2="488" y2="140" stroke="#4f46e5" stroke-width="2" marker-end="url(#E)"/>
+
+  <rect x="492" y="80" width="180" height="120" rx="14" fill="#fff7ed" stroke="#d97706" stroke-width="2"/>
+  <text x="582" y="112" font-size="15" font-weight="700" fill="#b45309" text-anchor="middle">③ 打分</text>
+  <text x="582" y="140" font-size="12.5" fill="#92400e" text-anchor="middle">规则判分（含关键词/JSON</text>
+  <text x="582" y="160" font-size="12.5" fill="#92400e" text-anchor="middle">校验）+ LLM 判分 + 人工抽检</text>
+  <line x1="672" y1="140" x2="714" y2="140" stroke="#4f46e5" stroke-width="2" marker-end="url(#E)"/>
+
+  <rect x="718" y="80" width="140" height="120" rx="14" fill="#fdf2f8" stroke="#ec4899" stroke-width="2"/>
+  <text x="788" y="112" font-size="15" font-weight="700" fill="#be185d" text-anchor="middle">④ 改进</text>
+  <text x="788" y="140" font-size="12.5" fill="#9d174d" text-anchor="middle">改提示词/工具/</text>
+  <text x="788" y="160" font-size="12.5" fill="#9d174d" text-anchor="middle">检索 → 回到 ②</text>
+
+  <line x1="788" y1="200" x2="130" y2="232" stroke="#4f46e5" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#E)"/>
+  <rect x="210" y="240" width="460" height="86" rx="16" fill="#fff" stroke="#94a3b8" stroke-width="1.6"/>
+  <text x="440" y="272" font-size="15" font-weight="700" fill="#1f2430" text-anchor="middle">评测指标分层（从粗到细）</text>
+  <text x="440" y="300" font-size="13.5" fill="#475569" text-anchor="middle">任务成功率（最终做成没）→ 步骤正确率 → 单步质量（相关性/忠实度/格式合规）</text>
+</svg>

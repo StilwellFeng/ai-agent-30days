@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 380" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <text x="440" y="34" font-size="19" font-weight="700" fill="#1f2430" text-anchor="middle">Embedding：把“意思”变成坐标</text>
+
+  <rect x="40" y="70" width="360" height="120" rx="16" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+  <text x="220" y="102" font-size="15" font-weight="700" fill="#4338ca" text-anchor="middle">文字 → 一串数字（向量）</text>
+  <text x="220" y="130" font-size="13" fill="#475569" text-anchor="middle">“猫” → [0.12, -0.31, 0.87, …]</text>
+  <text x="220" y="154" font-size="13" fill="#475569" text-anchor="middle">“宠物猫” → [0.11, -0.30, 0.85, …]</text>
+  <text x="220" y="176" font-size="12.5" fill="#94a3b8" text-anchor="middle">意思越像，数字越接近</text>
+  <line x1="400" y1="130" x2="470" y2="130" stroke="#4f46e5" stroke-width="2"/>
+  <text x="435" y="118" font-size="12" fill="#66707f" text-anchor="middle">→</text>
+
+  <rect x="474" y="70" width="366" height="120" rx="16" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <text x="657" y="102" font-size="15" font-weight="700" fill="#0f766e" text-anchor="middle">向量空间：语义地图</text>
+  <text x="657" y="130" font-size="13" fill="#115e59" text-anchor="middle">意思相近的句子聚在一起</text>
+  <text x="657" y="154" font-size="13" fill="#115e59" text-anchor="middle">“如何给猫洗澡” ≈ “宠物清洁指南”</text>
+  <text x="657" y="176" font-size="12.5" fill="#94a3b8" text-anchor="middle">即使没有一个字相同也能找到</text>
+
+  <rect x="120" y="220" width="640" height="120" rx="16" fill="#fff" stroke="#94a3b8" stroke-width="1.8"/>
+  <text x="440" y="252" font-size="15.5" font-weight="700" fill="#1f2430" text-anchor="middle">相似度怎么算？</text>
+  <text x="440" y="282" font-size="13.5" fill="#475569" text-anchor="middle">余弦相似度：看两个向量“方向”差多少（0°=完全一致，90°=无关）</text>
+  <text x="440" y="308" font-size="13.5" fill="#475569" text-anchor="middle">向量数据库（Chroma / FAISS / pgvector…）就是为“海量向量快速找最近邻”而生</text>
+  <text x="440" y="330" font-size="12" fill="#94a3b8" text-anchor="middle">说明：以上库名为真实存在的常用工具，具体用法以各自官方文档为准</text>
+</svg>

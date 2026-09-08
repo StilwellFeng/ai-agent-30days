@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 10 · 工具调用实战：天气查询助手 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 10 / 30 · 第二周 · 动手</div>
+        <h1>工具调用实战：写一个天气查询助手</h1>
+        <p class="sub">Day 5 讲了 Function Calling 的原理，今天写一个<strong>真正联网</strong>的工具函数，体会“工具”到底是什么。</p>
+        <div class="goal"><span class="chip">🎯 目标：写并运行一个会调网络 API 的天气工具</span><span class="chip">⏱ 35 分钟</span><span class="chip">💻 Python + 联网</span></div>
+      </header>
+      <article>
+        <p class="lead">先复习 Day 5 那张图：在 Function Calling 里，<strong>模型负责“决定调哪个工具、传什么参数”，真正联网干活的是你写的普通函数。</strong>今天我们就写这个“普通函数”，并且不依赖任何 API Key。</p>
+
+        <h2>回顾：工具在闭环中的位置</h2>
+        <figure><div class="frame"><img src="../diagrams/d05-tool.svg" alt="Function Calling 闭环"></div>
+        <figcaption>图 10-1　今天只做“② 程序执行工具”这一步：一个能联网查天气的 Python 函数</figcaption></figure>
+
+        <h2>我们的工具：get_weather(city)</h2>
+        <p>课程仓库已备好 <code>code/weather_tool.py</code>。它使用免费的 <a href="https://wttr.in" target="_blank" rel="noopener">wttr.in</a> 服务，不需要注册和 Key。先跑起来：</p>
+        <pre>python3 code/weather_tool.py 北京
+python3 code/weather_tool.py 上海</pre>
+        <p>你会看到类似：<code>上海: 🌦️ +26°C</code>。核心代码只有十几行：</p>
+        <pre>import urllib.parse, urllib.request
+
+def get_weather(city: str) -> str:
+    if not city.strip():
+        return "错误：城市不能为空"
+    q = urllib.parse.quote(city.strip())          # 处理中文
+    url = f"https://wttr.in/{q}?format=3&lang=zh"
+    req = urllib.request.Request(url, headers={"User-Agent": "curl/8"})
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            return resp.read().decode("utf-8", "replace").strip()
+    except Exception as e:
+        return f"查询失败：{e.__class__.__name__}（请检查网络）"</pre>
+
+        <h2>一个“好工具”的四个标准</h2>
+        <ol>
+          <li><strong>输入简单</strong>：只接收必要的参数（城市名）。</li>
+          <li><strong>输出是纯数据/纯文本</strong>：方便拼回给 LLM，而不是打印一堆日志。</li>
+          <li><strong>失败不抛异常</strong>：网络挂了也返回一句可读的错误，而不是让整个 Agent 崩溃。</li>
+          <li><strong>有超时与限流意识</strong>：15 秒超时；别高频调用免费服务。</li>
+        </ol>
+
+        <h2>它离“Agent 的手”还差什么？</h2>
+        <p>只差“大脑”来指挥它。真实 Agent 里，你会把函数写一份“说明书”注册给 LLM：</p>
+        <pre>{ "name": "get_weather", "description": "查询指定城市的实时天气",
+  "parameters": { "city": { "type": "string", "description": "城市名，如：北京" } } }</pre>
+        <p>用户说“北京热吗？”，LLM 看到说明书后输出 <code>调用 get_weather(city="北京")</code>，你的程序执行并把结果回填给它，它再回答“北京 24°C，不算热”。<strong>这一步的“接线”各家平台写法不同，做项目时以所用平台的官方文档为准。</strong></p>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 12 分钟）</h2>
+          <ol>
+            <li>运行 <code>weather_tool.py</code> 查 3 个城市，并故意查一个不存在的城市，看错误处理是否友好。</li>
+            <li>给它加一个参数 <code>days</code>（未来 3 天预报），wttr.in 支持 <code>?format=4&amp;lang=zh</code> 等格式，试试扩展（以 wttr.in 文档为准）。</li>
+            <li>仿照它，写第二个“工具”：<code>get_news_headlines()</code>（可用任意公开接口，或先返回假数据占位），并写出它的“说明书”JSON。</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>工具的本质</span><span>就是一个输入简单、输出干净、出错不崩的普通函数</span>
+            <span>工具 + 说明书</span><span>把 name/description/parameters 注册给 LLM，它才能“知道”并调用</span>
+            <span>今天跑通</span><span>code/weather_tool.py：真正联网查天气，无 Key</span>
+            <span>下一步</span><span>Day 11 给 Agent 外接“知识库”（RAG），让它懂你的私有资料</span>
+          </div>
+        </div>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

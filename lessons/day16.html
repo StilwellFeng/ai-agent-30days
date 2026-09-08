@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 16 · LangChain 核心组件动手用 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 16 / 30 · 第三周 · 工程化开发</div>
+        <h1>LangChain 核心组件动手用</h1>
+        <p class="sub">不背 API，先建立“组件地图”：Model / Prompt / Tool / Memory / Retriever 各自负责什么、怎么串。</p>
+        <div class="goal"><span class="chip">🎯 目标：看懂一个框架示例在做什么，能改参数</span><span class="chip">⏱ 30 分钟</span></div>
+      </header>
+      <article>
+        <p class="lead">LangChain 这类框架的组件，几乎都能对应到我们前两周学过的概念。<strong>你已经有地图了，剩下的只是认识框架里每个零件的“牌子”。</strong></p>
+<figure><div class="frame"><img src="../diagrams/d16-components.svg" alt="LangChain 组件地图与已学概念的对应"></div>
+        <figcaption>图 16-1　组件地图：框架里的每个积木，都是你已经学过的概念</figcaption></figure>
+
+        <h2>组件地图（概念对应）</h2>
+        <table>
+          <tr><th>框架组件</th><th>对应你已学的概念</th><th>典型用途</th></tr>
+          <tr><td>Chat Model</td><td>LLM（Day 2）</td><td>统一调用各家模型</td></tr>
+          <tr><td>Prompt Template</td><td>提示词五要素（Day 4/8）</td><td>把变量填进固定模板</td></tr>
+          <tr><td>Tool</td><td>工具函数 + 说明书（Day 5/10）</td><td>包装你的 Python 函数给模型用</td></tr>
+          <tr><td>Memory</td><td>记忆（Day 6）</td><td>自动管理对话历史</td></tr>
+          <tr><td>Retriever</td><td>RAG 检索（Day 11）</td><td>从向量库取相关片段</td></tr>
+          <tr><td>Agent / Chain</td><td>规划与编排（Day 13/18）</td><td>决定执行顺序与循环</td></tr>
+        </table>
+
+        <h2>一个典型示例长什么样（结构示意，非可运行）</h2>
+        <pre># 伪代码：理解“接线”逻辑即可，别背 API
+model   = ChatModel(provider="...", model="...")      # 1. 连模型
+prompt  = PromptTemplate("你是{role}，请…{task}")      # 2. 提示词模板
+tool    = Tool.from_function(get_weather, description=…) # 3. 注册工具
+memory  = ConversationMemory()                          # 4. 记忆
+agent   = Agent(model=model, tools=[tool], memory=memory) # 5. 组装
+answer  = agent.run("北京天气怎么样？")                  # 6. 运行</pre>
+        <p>看到没有？每一行都是你前两周手工做过的事，框架只是给了现成零件。</p>
+
+        <h2>动手建议：从“抄官方示例”开始</h2>
+        <ol>
+          <li>找官方文档里 <strong>“Build a simple agent”</strong> 之类的入门示例，<strong>完整跑通</strong>（通常需要 API Key 与安装依赖，先确认你的环境）。</li>
+          <li>逐行注释：这一行对应组件地图里的哪一格？</li>
+          <li>改 3 个地方：换你的系统提示词、换你的工具函数、换你的问题——跑通即算学会。</li>
+        </ol>
+        <div class="callout tip"><strong>💡 环境准备提示：</strong>框架通常用 <code>pip install langchain langchain-openai</code> 这类命令安装，并需要模型 API Key。安装依赖和申请 Key 属于你本机环境的操作，按需进行；示例代码一律以官方文档为准。</div>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 20–40 分钟）</h2>
+          <ol>
+            <li>打开官方文档的入门示例，把每个组件抄进一张“组件地图”笔记（含你的中文注释）。</li>
+            <li>不做任何修改先跑通一次；再只改系统提示词，观察行为变化。</li>
+            <li>记录你遇到的两个报错与解法——这是最真实的学习材料。</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>组件地图</span><span>Model / Prompt / Tool / Memory / Retriever / Agent —— 全是旧概念的新名字</span>
+            <span>学习法</span><span>先跑通官方示例 → 逐行注释 → 改 3 处 → 变成自己的</span>
+            <span>心态</span><span>API 会变，地图不会；理解概念比背代码重要</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：把组件真正“组装”成一个完整 Agent：从需求、配置到跑通一次真实对话。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

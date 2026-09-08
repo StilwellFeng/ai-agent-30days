@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 21 · 本周实战：自动化信息收集小助手 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 21 / 30 · 第三周收官 · 实战</div>
+        <h1>本周实战：自动化信息收集小助手</h1>
+        <p class="sub">把三周所学串成第一个“无人值守”的 Agent：定时抓取 → 清洗总结 → 交付报告。</p>
+        <div class="goal"><span class="chip">🎯 目标：跑通一条定时信息流水线</span><span class="chip">⏱ 60–90 分钟</span><span class="chip">💻 Python + 定时任务</span></div>
+      </header>
+      <article>
+        <p class="lead">场景：每天早上，自动收集你关注的几个信息源（比如 AI 新闻 RSS/网页），过滤掉不感兴趣的，总结成 5 条要点，发到你的邮箱或存成 Markdown。这就是一个<strong>固定流程 + LLM 做理解</strong>的典型 Agent。</p>
+
+        <h2>流水线设计</h2>
+        <figure><div class="frame"><img src="../diagrams/d21-info-agent.svg" alt="信息收集助手流水线"></div>
+        <figcaption>图 21-1　定时触发 → 采集 → 清洗/总结 → 交付；LLM 只负责“理解”环节</figcaption></figure>
+
+        <h2>分步实现（建议顺序）</h2>
+        <ol>
+          <li><strong>采集（不用 LLM）</strong>：用 Python 标准库/简单 HTTP 抓取 1–2 个 RSS 或页面，解析出标题列表。先不追求全，1 个源跑通即可。</li>
+          <li><strong>清洗（规则）</strong>：去重、按关键词过滤（你关心的主题）。规则能做的别让 LLM 做。</li>
+          <li><strong>总结（LLM）</strong>：把标题+摘要拼成一段，让模型“挑出与你兴趣最相关的 5 条，每条一句话”。</li>
+          <li><strong>交付</strong>：输出 Markdown 文件（最简单的交付物）；进阶再发邮件/推送。</li>
+          <li><strong>定时</strong>：先手动运行；稳定后交给系统的定时任务（macOS 用 launchd / 或 Python 里的定时循环，方法以官方文档为准）。</li>
+        </ol>
+
+        <h2>最容易踩的坑</h2>
+        <table>
+          <tr><th>坑</th><th>对策</th></tr>
+          <tr><td>抓取目标网站结构变了 → 解析崩</td><td>解析代码集中、带错误提示；失败时保留原始内容而不是静默失败</td></tr>
+          <tr><td>抓太频繁 → 被限流/封 IP</td><td>降低频率、遵守对方 robots/条款、加延时；只抓必要内容</td></tr>
+          <tr><td>LLM 总结“自由发挥”</td><td>只让它基于给定内容总结，禁止补充外部知识</td></tr>
+          <tr><td>跑了几天没人看 → 坏了不知道</td><td>失败告警（至少打印日志 + 必要时推送）；先人工抽查一周</td></tr>
+        </table>
+
+        <div class="callout warn"><strong>⚠️ 合规提醒：</strong>抓取他人网站前注意版权与使用条款，控制频率，不抓需要登录/受保护的内容。本课示例建议用你“有权使用”的信息源（如自己的订阅、官方 RSS）。</div>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 30–60 分钟）</h2>
+          <ol>
+            <li>选定 1 个信息源，写出它的“采集→清洗→总结→交付”数据流与字段格式。</li>
+            <li>实现采集 + 清洗两步（纯 Python，不用 LLM），先能打印出过滤后的标题列表。</li>
+            <li>把标题列表交给任意 LLM，用你写的“总结指令”得到简报；连续跑 3 天，记录稳定性。</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>项目形态</span><span>无人值守流水线：定时 + 采集 + 清洗 + LLM 总结 + 交付</span>
+            <span>分工原则</span><span>采集/定时交给可靠程序，LLM 只做“理解/生成”</span>
+            <span>防坑</span><span>解析容错 · 控制频率 · 禁止模型自由发挥 · 失败要能发现</span>
+            <span>三周回顾</span><span>你已经能独立设计并实现一个真实的 Agent 应用了</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">下周预告：进入第四周“实战与毕业设计”——先补上安全、评测、成本这些“上生产”必会的课。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

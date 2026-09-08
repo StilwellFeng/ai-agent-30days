@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 400" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif">
+  <defs><marker id="MA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4f46e5"/></marker></defs>
+  <text x="440" y="34" font-size="19" font-weight="700" fill="#1f2430" text-anchor="middle">多 Agent 协作的三种常见模式</text>
+
+  <!-- 主管 -->
+  <rect x="40" y="70" width="250" height="290" rx="16" fill="#f0fdfa" stroke="#0d9488" stroke-width="2"/>
+  <text x="165" y="100" font-size="15.5" font-weight="700" fill="#0f766e" text-anchor="middle">模式 A：主管-员工</text>
+  <rect x="85" y="120" width="160" height="52" rx="10" fill="#fff" stroke="#0d9488"/>
+  <text x="165" y="152" font-size="14" font-weight="700" fill="#0f766e" text-anchor="middle">🧑‍💼 主管（拆活/汇总）</text>
+  <rect x="60" y="196" width="100" height="52" rx="10" fill="#fff" stroke="#94a3b8"/>
+  <text x="110" y="228" font-size="12.5" fill="#334155" text-anchor="middle">研究员</text>
+  <rect x="170" y="196" width="100" height="52" rx="10" fill="#fff" stroke="#94a3b8"/>
+  <text x="220" y="228" font-size="12.5" fill="#334155" text-anchor="middle">写手</text>
+  <line x1="165" y1="172" x2="110" y2="194" stroke="#4f46e5" stroke-width="1.6" marker-end="url(#MA)"/>
+  <line x1="165" y1="172" x2="220" y2="194" stroke="#4f46e5" stroke-width="1.6" marker-end="url(#MA)"/>
+  <text x="165" y="276" font-size="12.5" fill="#115e59" text-anchor="middle">主管拆任务、收结果、汇总</text>
+  <text x="165" y="296" font-size="12.5" fill="#115e59" text-anchor="middle">适合：需要分工的大任务</text>
+  <text x="165" y="340" font-size="12" fill="#94a3b8" text-anchor="middle">最常用、最容易失控也最值得先试</text>
+
+  <!-- 流水线 -->
+  <rect x="315" y="70" width="250" height="290" rx="16" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+  <text x="440" y="100" font-size="15.5" font-weight="700" fill="#4338ca" text-anchor="middle">模式 B：流水线</text>
+  <rect x="340" y="122" width="200" height="50" rx="10" fill="#fff" stroke="#6366f1"/>
+  <text x="440" y="152" font-size="13.5" fill="#4338ca" text-anchor="middle">A 起草 → B 审核 → C 定稿</text>
+  <line x1="440" y1="172" x2="440" y2="200" stroke="#4f46e5" stroke-width="1.8" marker-end="url(#MA)"/>
+  <rect x="355" y="204" width="170" height="50" rx="10" fill="#fff" stroke="#6366f1"/>
+  <text x="440" y="234" font-size="13.5" fill="#4338ca" text-anchor="middle">每步输入 = 上一步输出</text>
+  <line x1="440" y1="254" x2="440" y2="280" stroke="#4f46e5" stroke-width="1.8" marker-end="url(#MA)"/>
+  <text x="440" y="310" font-size="12.5" fill="#4338ca" text-anchor="middle">适合：流程清晰、可分段质检</text>
+  <text x="440" y="340" font-size="12" fill="#94a3b8" text-anchor="middle">本质 = 多步编排，每个角色一个 Agent</text>
+
+  <!-- 辩论/协作 -->
+  <rect x="590" y="70" width="250" height="290" rx="16" fill="#fdf2f8" stroke="#ec4899" stroke-width="2"/>
+  <text x="715" y="100" font-size="15.5" font-weight="700" fill="#be185d" text-anchor="middle">模式 C：辩论/评审</text>
+  <circle cx="660" cy="190" r="34" fill="#fff" stroke="#ec4899" stroke-width="2"/>
+  <text x="660" y="197" font-size="13" fill="#be185d" text-anchor="middle">正方</text>
+  <circle cx="770" cy="190" r="34" fill="#fff" stroke="#ec4899" stroke-width="2"/>
+  <text x="770" y="197" font-size="13" fill="#be185d" text-anchor="middle">反方</text>
+  <line x1="694" y1="180" x2="736" y2="180" stroke="#ec4899" stroke-width="1.6" marker-end="url(#MA)"/>
+  <line x1="736" y1="200" x2="694" y2="200" stroke="#ec4899" stroke-width="1.6" marker-end="url(#MA)"/>
+  <rect x="630" y="250" width="170" height="40" rx="10" fill="#fff" stroke="#ec4899"/>
+  <text x="715" y="275" font-size="12.5" fill="#be185d" text-anchor="middle">裁判 Agent 裁决</text>
+  <text x="715" y="310" font-size="12.5" fill="#9d174d" text-anchor="middle">适合：需要多角度质检的决策</text>
+  <text x="715" y="340" font-size="12" fill="#94a3b8" text-anchor="middle">贵，谨慎使用</text>
+</svg>

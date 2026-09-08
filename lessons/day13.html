@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 13 · Agent 的规划能力：任务拆解与反思 | AI Agent 30 天</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🤖</span><span>AI Agent 30 天</span></div>
+    <h3>课程目录</h3>
+    <ul id="sidebar-list"></ul>
+  </aside>
+  <main class="main">
+    <div class="container">
+      <header class="day-hero">
+        <div class="kicker">Day 13 / 30 · 第二周 · 让 Agent 更聪明</div>
+        <h1>Agent 的规划能力：任务拆解与反思</h1>
+        <p class="sub">同样是“帮我搞定一件事”，为什么有的 Agent 靠谱、有的乱撞？差别常在“会不会规划”。</p>
+        <div class="goal"><span class="chip">🎯 目标：掌握三种规划模式及选择口诀</span><span class="chip">⏱ 30 分钟</span></div>
+      </header>
+      <article>
+        <p class="lead">规划（Planning）是 Agent 四要素里的“大脑皮层”：<strong>把模糊目标变成可执行步骤，并在执行中根据结果调整。</strong>今天把三种常见模式讲清楚，并给出选择方法。</p>
+
+        <h2>三种规划强度</h2>
+        <figure><div class="frame"><img src="../diagrams/d13-replan.svg" alt="规划的三种强度：固定流程、ReAct、反思"></div>
+        <figcaption>图 13-1　横轴是“灵活性”，纵轴是“成本/稳定性”——没有最好，只有最合适</figcaption></figure>
+
+        <h3>① 固定流程（Workflow）</h3>
+        <p>步骤写死，像流水线：抓数据 → 清洗 → 汇总 → 发报告。优点：便宜、快、可预测、易测试。缺点：遇到没设计过的情况就“卡死”。<strong>凡是流程常年不变的任务，优先用固定流程，根本不需要让 LLM 现场规划。</strong></p>
+
+        <h3>② ReAct：想一步，做一步</h3>
+        <p>这是当前 LLM Agent 的“基本盘”，循环为：</p>
+        <pre>Thought（我该怎么处理当前情况？）
+ → Action（调用工具/查资料）
+ → Observation（看到了什么结果）
+ → 回到 Thought …直到可以给出最终答案</pre>
+        <p>每步都基于<strong>真实观察</strong>决定下一步，而不是照着预演走——适合“路线不固定”的开放式任务。</p>
+
+        <h3>③ 反思（Reflection / Self-Critique）</h3>
+        <p>在 ReAct 基础上加一道“质检”：做完一步或生成初稿后，让模型<strong>自己挑毛病再改进</strong>。写代码时“生成 → 自查 bug → 修改 → 再查”就是典型。质量更高，但更慢、更贵（多几轮调用）。</p>
+
+        <h2>任务拆解技巧（写 Prompt / 设计 Agent 时都用得上）</h2>
+        <ul>
+          <li><strong>MECE 拆解</strong>：子任务互不重叠、合起来覆盖全集（“查资料/做分析/写结论”而不是想到哪拆到哪）。</li>
+          <li><strong>给依赖排序</strong>：先做需要前置结果的事（先查数据，再分析，再写报告）。</li>
+          <li><strong>定义“完成”</strong>：每个子任务有明确的验收标准，Agent 才知道何时停。</li>
+          <li><strong>留检查点</strong>：关键节点把中间结果给用户确认，避免一路错到底。</li>
+        </ul>
+
+        <div class="callout warn"><strong>⚠️ 永远记得兜底：</strong>无论用哪种规划，都要设<strong>最大步数、超时、Token/成本上限</strong>，并允许 Agent 说“我做不到/需要更多信息”。无限循环的 Agent 是事故，不是能力。</div>
+
+        <div class="practice">
+          <h2>✍️ 今日练习（约 12 分钟）</h2>
+          <ol>
+            <li>选你 Day 1 记下的任务，用“Thought → Action → Observation”纸笔走 2 轮，体会 ReAct。</li>
+            <li>同一任务分别设计“固定流程版”和“ReAct 版”，写出各自的步骤与适用前提。</li>
+            <li>让任意 AI 助手做一个多步任务（如“调研三个竞品并做对比表”），观察它会不会先列计划、中途调整——把观察写进笔记。</li>
+          </ol>
+        </div>
+
+        <div class="summary">
+          <h2>📌 今日小结</h2>
+          <div class="kv">
+            <span>三模式</span><span>固定流程（省/稳）→ ReAct（灵活）→ 反思（质高/贵）</span>
+            <span>ReAct</span><span>Thought → Action → Observation 循环，Agent 基本盘</span>
+            <span>拆解要点</span><span>不重不漏 · 排依赖 · 定义完成 · 留检查点</span>
+            <span>铁律</span><span>最大步数/超时/预算兜底，允许“做不到”</span>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:14px">明天预告：第二周实战——把提示词、记忆、检索、规划串起来，设计一个“个人学习笔记问答助手”。</p>
+      </article>
+      <div class="pager"><a id="prev-link" href="#"></a><a id="next-link" href="#"></a></div>
+      <div class="checkin"><button id="checkin-btn">完成本课打卡</button><small>打卡进度保存在本机浏览器</small></div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>
